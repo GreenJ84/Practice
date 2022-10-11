@@ -20,4 +20,17 @@ function minMaxAvg(array){
 
 }
 
-minMaxAvg([0,1,2,3,4,5,6,7,8,9,10]);
+const minMaxAvg2 = (array) => {
+    if (array.length < 1){ return null }
+    let min = array[0], max = array[0], avg = 0;
+
+    array.map(item => {
+        item > max ? max = item : '';
+        item < min ? min = item : ''; 
+        avg += item;
+    })
+    avg /= array.length;
+    console.log('The array min is '+min+', the max is '+max+', and the avg is '+avg+".")
+}
+
+minMaxAvg2([0,1,2,3,4,5,6,7,8,9,10]);
