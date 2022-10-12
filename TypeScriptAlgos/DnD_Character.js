@@ -40,6 +40,10 @@ var DnDCharacter = /** @class */ (function () {
     };
     return DnDCharacter;
 }());
+
+const character = new DnDCharacter();
+console.log(character.strength, character.wisdom, character.intelligence, character.dexterity, character.constitution, character.charisma, character.hitpoints)
+
 //! expect DnDCharacter.getModifierFor(3)) to equal -> -4
 //! expect DnDCharacter.getModifierFor(4)) to equal -> -3
 //! expect DnDCharacter.getModifierFor(5)) to equal -> -3
