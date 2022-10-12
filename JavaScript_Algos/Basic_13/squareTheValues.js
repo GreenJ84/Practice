@@ -8,7 +8,12 @@ function square(array){
     console.log(array);
 }
 
-square([1,2,3,4,5]);
-square([8, 10, 12, 14]);
-square([10, 20, 30, 40 ,50, 60]);
-square([115]);
+const square2 = (array) => {
+    array = array.map(item => item*item);
+    console.log(array);
+}
+
+square2([1,2,3,4,5]);
+square2([8, 10, 12, 14]);
+square2([10, 20, 30, 40 ,50, 60]);
+square2([115]);
