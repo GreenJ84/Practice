@@ -13,5 +13,9 @@ function printArrayValues2(array){
     }
 }
 
+const printArrayValues3 = (array) => {
+    array.map(item => console.log(item));
+}
 
-printArrayValues2([0,1,2,3,4,5,6,7,8,9,10]);
+printArrayValues3([0,1,2,3,4,5,6,7,8,9,10]);
+printArrayValues3([6,2,4,7,9,8,1,2,10]);
