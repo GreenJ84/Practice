@@ -11,4 +11,15 @@ function shiftArray(array){
     return array
 }
 
-console.log(shiftArray([1,2,3,4,5,6,7,8,9]))
+const shiftArray2 = (array) => {
+    array.map((item, idx) => {
+        if (idx === array.length-1){
+            array[idx] = 0;
+        } else{
+            array[idx] = array[idx+1];
+        }
+    })
+    return array;
+}
+
+console.log(shiftArray2([1,2,3,4,5,6,7,8,9]))
