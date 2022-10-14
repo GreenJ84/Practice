@@ -9,4 +9,10 @@ function zeroOutNegatives(array){
     return array;
 }
 
-console.log(zeroOutNegatives([1,-2,3,-4,5,6,7,-8,9]));
+const zeroOutNegatives2 = (array) => {
+    array.map((idx) => {
+        array[idx] < 0 ? array[idx] = 0 : '';
+    })
+    return array;
+}
+console.log(zeroOutNegatives2([1,-2,3,-4,5,6,7,-8,9]));
