@@ -18,3 +18,21 @@ function ThreesFives(){
 }
 
 ThreesFives()
+
+function BetterThreesFives(start, end){
+    let i = start;
+    let sum = 0;
+    while (i < end){
+        if (i % 3 == 0 || i % 5 == 0){
+            if (i % 3 == 0 && i % 5 == 0){
+                // console.log('Not adding'+i);
+            } else {
+                sum += i;
+            }
+        }
+        i++
+    }
+    console.log(sum);
+}
+
+BetterThreesFives(100,4000000)
