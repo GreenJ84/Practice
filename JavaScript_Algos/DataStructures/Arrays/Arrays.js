@@ -29,11 +29,25 @@ function popFront(array){
     return array;
 }
 
-// function insertAt(){
+function insertAt(idx, val, array){
+    let i = idx + 1;
+    let temp;
+    let setLength = array.length;
+    let set = array[idx];
+    array[idx] = val;
 
-// }
+    while (i < setLength){
+        temp = array[i];
+        array[i] = set;
+        set = temp;
+        i++;
+    }
+    array[i] = set;
+    console.log(array)
+    return array;
+}
 
 // function removeAt(){}
 
 
-popFront([1,2,3,4,5,6,7,8,9,10]);
+insertAt(3, 4, [1,2,3,5,6,7,8,9,10]);
