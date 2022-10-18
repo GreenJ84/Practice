@@ -1,5 +1,6 @@
 // All Things Array Manipulation
 // Basic manipulations of Array types
+// No built in functions besides pop()
 
 function pushToFront(val, array){
     let i = 0;
@@ -47,7 +48,17 @@ function insertAt(idx, val, array){
     return array;
 }
 
-// function removeAt(){}
+function removeAt(idx, array){
+    if (idx != array.length-1){
+    let i = idx+1;
+    while (i < array.length){
+        array[i-1] = array[i];
+        i++;
+    }}
+    array.pop();
+    console.log(array);
+    return array;
+}
 
 
-insertAt(3, 4, [1,2,3,5,6,7,8,9,10]);
+removeAt(9, [1,2,3,4,5,6,7,8,9,10]);
