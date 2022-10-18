@@ -18,12 +18,16 @@ function pushToFront(val, array){
     return array;
 }
 
-// function popFront(array){
-//     while (i < array.length){
-//         array
-//         i++;
-//     }
-// }
+function popFront(array){
+    let i = 1;
+    while (i < array.length){
+        array[i-1] = array[i];
+        i++;
+    }
+    array.pop();
+    console.log(array);
+    return array;
+}
 
 // function insertAt(){
 
@@ -32,4 +36,4 @@ function pushToFront(val, array){
 // function removeAt(){}
 
 
-pushToFront(1, [5,6,7,8,9,10]);
+popFront([1,2,3,4,5,6,7,8,9,10]);
