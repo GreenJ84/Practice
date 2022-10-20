@@ -10,12 +10,12 @@ function rotateArr(array, offset){
     let i = 0;
 
     while ( i < array.length ){
-        result[(i + offset) % array.length] = array[i];
+        result[Math.abs((i + offset) % array.length)] = array[i];
         i++;
     }
     console.log(result);
     return result;
 }
 
-rotateArr([1,2,3], 2);
+rotateArr([1,2,3], -2);
 
