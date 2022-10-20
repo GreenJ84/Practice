@@ -13,4 +13,15 @@ function maxSubArray(array){
     return maxSum;
 }
 
-maxSubArray([-2,1,-3,4,-1,2,1,-5,4]);
+// maxSubArray([-2,1,-3,4,-1,2,1,-5,4]);
+
+var maxSubArray2 = function(array) {
+    let sum = 0;
+    let maxSum = array[0]
+    for(let num of array){
+        if(sum < 0) sum = 0;
+        sum += num;
+        maxSum = Math.max(maxSum, sum);
+    }
+    return maxSum;
+};
