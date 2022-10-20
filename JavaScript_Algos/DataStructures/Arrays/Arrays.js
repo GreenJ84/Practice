@@ -1,6 +1,5 @@
-// All Things Array Manipulation
-// Basic manipulations of Array types
-// No built in functions besides pop()
+//! All Things Array
+//* Basic manipulations of Array types
 
 function pushToFront(val, array){
     let i = 0;
