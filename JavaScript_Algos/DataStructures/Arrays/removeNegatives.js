@@ -20,3 +20,10 @@ function removeNegatives(array){
     return array;
 }
 // removeNegatives([-1, 1, -2, 2, -3, 3]);
+
+
+//? Pretty sure filter still uses loops under the hood but no explicit loops used
+function removeNegatives2(array){
+    return array.filter(item => item > -1);
+}
+// removeNegatives2([-1, 1, -2, 2, -3, 3]);
