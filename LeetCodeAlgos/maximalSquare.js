@@ -1,4 +1,23 @@
-var maximalSquare = function(matrix) {
+const isBigSquare = (yAxis, xAxis, j, i, matrix) => {
+    let square = true;
+    let  y = yAxis, x = xAxis;
+    while (x >= j){
+        if (matrix[y][x] === '0'){
+            square = false
+        }
+        x--;
+    }
+    while(y <= i){
+        if (matrix[y][x] === '0'){
+            square = false
+        }
+        y++;
+    }
+    return square;
+}
+
+
+const maximalSquare = function(matrix) {
     let area = 0;
     for(let i = 0; i < matrix.length; i++){
         for(let j = 0; j< matrix[0].length; j++){
@@ -11,19 +30,12 @@ var maximalSquare = function(matrix) {
                 while(i-s >= 0 && j-s >= 0){
                     if(matrix[i-s][j] === '1' & matrix[i-s][j-s] === '1' && matrix[i][j-s] === '1'){
                         if (s > 1){
-                            let square = true;
-                            let  y = i-s, x = j;
-                            while (x >= j-s){
-                                if (matrix[y][x] === '0'){
-                                    square = false
+                            if (isBigSquare(i-s, j, j-s, i, matrix)){
+                                let side = s+1;
+                                if (side*side > area){
+                                    area = side * side;
                                 }
-                                x--;
-                            }
-                            while(y <= i){
-                                if (matrix[y][x] === '0'){
-                                    square = false
-                                }
-                                y++;
+                                s++;
                             }
                         } else {
                             let side = s+1;
@@ -38,19 +50,12 @@ var maximalSquare = function(matrix) {
                 while(i-s >= 0 && j+s < matrix[0].length){
                     if(matrix[i-s][j] === '1' & matrix[i-s][j+s] === '1' && matrix[i][j+s] === '1'){
                         if (s > 1){
-                            let square = true;
-                            let  y = i-s, x = j;
-                            while (x <= j+s){
-                                if (matrix[y][x] === '0'){
-                                    square = false
+                            if(isBigSquare(i-s, j, j+s, i, matrix)){
+                                let side = s+1;
+                                if (side*side > area){
+                                    area = side * side;
                                 }
-                                x++;
-                            }
-                            while(y <= i){
-                                if (matrix[y][x] === '0'){
-                                    square = false
-                                }
-                                y++;
+                                s++;
                             }
                         } else {
                             let side = s+1;
@@ -65,19 +70,12 @@ var maximalSquare = function(matrix) {
                 while(i+s < matrix.length && j+s < matrix[0].length){
                     if(matrix[i+s][j] === '1' & matrix[i+s][j+s] === '1' && matrix[i][j+s] === '1'){
                         if (s > 1){
-                            let square = true;
-                            let  y = i+s, x = j;
-                            while (x <= j+s){
-                                if (matrix[y][x] === '0'){
-                                    square = false
+                            if (isBigSquare(i+s, j, j+s, i, matrix)){
+                                let side = s+1;
+                                if (side*side > area){
+                                    area = side * side;
                                 }
-                                x++;
-                            }
-                            while(y >= i){
-                                if (matrix[y][x] === '0'){
-                                    square = false
-                                }
-                                y--;
+                                s++;
                             }
                         } else {
                             let side = s+1;
@@ -92,19 +90,12 @@ var maximalSquare = function(matrix) {
                 while(i+s < matrix.length && j-s >=0){
                     if(matrix[i+s][j] === '1' & matrix[i+s][j-s] === '1' && matrix[i][j-s] === '1'){
                         if (s > 1){
-                            let square = true;
-                            let  y = i+s, x = j;
-                            while (x >= j-s){
-                                if (matrix[y][x] === '0'){
-                                    square = false
+                            if (isBigSquare(i+s, j, j-s, i, matrix)){
+                                let side = s+1;
+                                if (side*side > area){
+                                    area = side * side;
                                 }
-                                x--;
-                            }
-                            while(y >= i){
-                                if (matrix[y][x] === '0'){
-                                    square = false
-                                }
-                                y--;
+                                s++;
                             }
                         } else {
                             let side = s+1;
