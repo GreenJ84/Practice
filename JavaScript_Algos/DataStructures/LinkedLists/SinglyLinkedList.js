@@ -66,8 +66,20 @@ secondToLast(){
     }
 }
 
+// Checks and returns the length of a linked list
+length(){
+    if ( this.isEmpty() ) { return null }
+    let runner = this.head;
+    let len = 1;
+    while ( runner.next ){
+        len++;
+    }
+    console.log(len);
+    return len;
+}
+
 // Checks whether a list has a loop within itself
-hasLoop(){
+hasLoop(){ 
     if (this.isEmpty() || this.head.next == null){
         return false;
     }
@@ -388,3 +400,5 @@ removeVal(value){
 
 //? Use the SinglyLinkedList here
 var list = new SinglyLinkedList();
+list.insertAtFront(2);
+list.length();
