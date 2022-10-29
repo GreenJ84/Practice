@@ -28,7 +28,15 @@ isEmpty() {
     return true;
 }
 
-// Check for a Noder containing certain data
+// Checks and returns the head of a list
+getHead(){
+    if ( this.head ) {
+        return this.head.data;
+    }
+    return null;
+}
+
+// Check if a Node containing certain data exists
 ifExists(searchTerm){
     let runner = this.head;
     if (this.isEmpty()){
@@ -43,7 +51,7 @@ ifExists(searchTerm){
     return false;
 }
 
-// Checks and prints the second to last Node
+// Checks and returns the second to last Node
 secondToLast(){
     if (this.head == null || this.head.next == null){
         return null;
