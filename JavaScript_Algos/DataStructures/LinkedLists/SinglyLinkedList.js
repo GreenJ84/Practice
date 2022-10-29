@@ -21,12 +21,12 @@ class SinglyLinkedList {
 //* Checks on the SLL
 //===========================================================
 // Checks whether a SLL is empty
-    isEmpty() {
-        if ( this.head ) {
-            return false;
-        }
-        return true;
+isEmpty() {
+    if ( this.head ) {
+        return false;
     }
+    return true;
+}
 
 // Check for a Noder containing certain data
 ifExists(searchTerm){
@@ -41,6 +41,21 @@ ifExists(searchTerm){
         runner = runner.next;
     }
     return false;
+}
+
+// Checks and prints the second to last Node
+secondToLast(){
+    if (this.head == null || this.head.next == null){
+        return null;
+    }
+    let runner = this.head;
+    while (runner.next != null){
+        if (runner.next.next == null){
+            console.log(runner);
+            return runner;
+        }
+        runner = runner.next;
+    }
 }
 
 // Checks whether a list has a loop within itself
@@ -161,20 +176,6 @@ insertBeforeVal(newVal, targetValue){
     return false;
 }
 
-// Checks and prints the second to last Node
-secondToLast(){
-    if (this.head == null || this.head.next == null){
-        return null;
-    }
-    let runner = this.head;
-    while (runner.next != null){
-        if (runner.next.next == null){
-            console.log(runner);
-            return runner;
-        }
-        runner = runner.next;
-    }
-}
 
 
 //* Removing from the SLL
