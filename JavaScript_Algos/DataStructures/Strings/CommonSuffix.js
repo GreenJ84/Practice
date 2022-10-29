@@ -2,7 +2,7 @@
 
 function commonSuffix(arr){
     let result = [''];
-    if (arr.length < 1){ return result.join() }
+    if (arr.length < 1){ return result.join('') }
 
     result = arr[0].split('').reverse();
     for (let i = 1; i < arr.length; i++){
@@ -13,10 +13,9 @@ function commonSuffix(arr){
             j++;
         }
         if (j < result.length){ result.splice(j, result.length-j); }
-        if ( result.length < 1 ){ return result }
+        if ( result.length < 1 ){ return 'None in Common' }
     }
     result = result.reverse().join('');
-    
     return result;
 }
 
