@@ -70,12 +70,27 @@ secondToLast(){
 length(){
     if ( this.isEmpty() ) { return null }
     let runner = this.head;
-    let len = 1;
-    while ( runner.next ){
+    let len = 0;
+    while ( runner ){
         len++;
+        runner = runner.next
     }
     console.log(len);
     return len;
+}
+
+// Checks and returns the average value of the list data
+average(){
+    if ( this.isEmpty()){ return null }
+    let runner = this.head;
+    let avg = 0;
+    while ( runner ){
+        avg += runner.data;
+        runner = runner.next
+    }
+    avg /= this.length();
+    console.log(avg);
+    return avg;
 }
 
 // Checks whether a list has a loop within itself
@@ -203,7 +218,7 @@ insertBeforeVal(newVal, targetValue){
 
 // Remove a Node from the front of a list
 removeFromFront() {
-    if( !this.isEmpty){
+    if( !this.isEmpty()){
         this.head = this.head.next;
     }
     return;
@@ -401,4 +416,7 @@ removeVal(value){
 //? Use the SinglyLinkedList here
 var list = new SinglyLinkedList();
 list.insertAtFront(2);
-list.length();
+list.insertAtFront(4);
+list.insertAtFront(6);
+list.insertAtFront(8);
+list.average()
