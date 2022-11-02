@@ -4,8 +4,6 @@ class Solution(object):
         m = len(obGr)
         n = len(obGr[0])
         # Base Cases
-        if m < 1 | n < 1:
-            return 0
         if obGr[m-1][n-1] | obGr[0][0] == 1:
             return 0
         if m == n == 1:
@@ -49,11 +47,11 @@ class Solution(object):
                 right = obGr[row][item+1]
 
                 if current == 0:
-                    if bottom & right <= 0:
+                    if bottom < 0 & right < 0:
                         obGr[row][item] = -1
-                    elif bottom <= 0:
+                    elif bottom < 0:
                         obGr[row][item] = right
-                    elif right <= 0:
+                    elif right < 0:
                         obGr[row][item] = bottom
                     else:
                         obGr[row][item] = bottom + right
@@ -64,4 +62,4 @@ class Solution(object):
             return 0
 
 solution = Solution()
-print(solution.uniquePathsWithObstacles([[0,0],[1,1],[0,0]]))
+print(solution.uniquePathsWithObstacles([[0,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,1,0],[0,0,0,0]]))
