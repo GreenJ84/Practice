@@ -1,5 +1,4 @@
-
-
+from collections import Counter
 class Solution:
     def longestPalindrome(self, s: str) -> int:
         x, y, res = {}, list(s), 0
@@ -18,9 +17,17 @@ class Solution:
         if 1 in x.values():
             res += 1
         return res
+    
+    def longestPalindrome2(self, s: str) -> int:
+        res = 0
+        for x in Counter(s).values():
+            res += x // 2 * 2
+            if res%2==0 and x%2==1:
+                res += 1
+        return res
 
 s = Solution()
-# print(s.longestPalindrome("abccccdd"))
-# print(s.longestPalindrome("a"))
-print(s.longestPalindrome("ccc"))
+print(s.longestPalindrome2("abccccdd"))
+print(s.longestPalindrome2("a"))
+print(s.longestPalindrome2("ccc"))
     
