@@ -36,6 +36,10 @@ getHead(){
     return null;
 }
 
+getTail(){
+
+}
+
 // Check if a Node containing certain data exists
 ifExists(searchTerm){
     let runner = this.head;
@@ -91,6 +95,30 @@ average(){
     avg /= this.length();
     console.log(avg);
     return avg;
+}
+
+min(){
+    if ( this.isEmpty()){ return null}
+    let runner = this.head;
+    let min = this.head.data;
+    while ( runner ){
+        runner.data < min ? min = runner.data: '';
+        runner = runner.next
+    }
+    console.log(min);
+    return min;
+}
+
+max(){
+    if ( this.isEmpty()){ return null}
+    let runner = this.head;
+    let max = this.head.data;
+    while ( runner ){
+        runner.data > max ? max = runner.data: '';
+        runner = runner.next
+    }
+    console.log(max);
+    return max;
 }
 
 // Checks whether a list has a loop within itself
@@ -307,58 +335,58 @@ removeVal(value){
     }
 
 // Display the list in output
-    display(){
-        if( this.isEmpty() ){
-            console.log("This list is empty!")
-        } else {
-            let n = 0;
-            let runner = this.head;
+display(){
+    if( this.isEmpty() ){
+        console.log("This list is empty!")
+    } else {
+        let n = 0;
+        let runner = this.head;
+        console.log('node ' + n + ': '+runner.data);
+        while( runner.next ){
+            runner = runner.next;
+            n++;
             console.log('node ' + n + ': '+runner.data);
-            while( runner.next ){
-                runner = runner.next;
-                n++;
-                console.log('node ' + n + ': '+runner.data);
-            }
-
         }
-        return;
+
     }
+    return;
+}
 
 // Move the smallest Node to the front of the list
-    moveMinToFront(){
-        let runner = this.head;
-        let counter=0;
-        let index;
-        let min = this.head;
+moveMinToFront(){
+    let runner = this.head;
+    let counter=0;
+    let index;
+    let min = this.head;
 
-        while (runner.next != null){
-            if (runner.next.data < min.data){
-                min = runner.next;
-                index = counter;
-            }
-            runner = runner.next;
-            counter++;
+    while (runner.next != null){
+        if (runner.next.data < min.data){
+            min = runner.next;
+            index = counter;
         }
-        if (min == this.head){
-            return list;
-        }
-
-        runner = this.head;
-        for (index; index > 0; index--){
-            runner = runner.next
-        }
-        let temp1 = runner.next;
-        if (runner.next.next != null){
-            runner.next = runner.next.next;
-        } else {
-            runner.next = null;
-        }
-
-        let temp = this.head;
-        this.head = temp1;
-        temp1.next = temp;
+        runner = runner.next;
+        counter++;
+    }
+    if (min == this.head){
         return list;
     }
+
+    runner = this.head;
+    for (index; index > 0; index--){
+        runner = runner.next
+    }
+    let temp1 = runner.next;
+    if (runner.next.next != null){
+        runner.next = runner.next.next;
+    } else {
+        runner.next = null;
+    }
+
+    let temp = this.head;
+    this.head = temp1;
+    temp1.next = temp;
+    return list;
+}
 
 // Concatonate a new list onto the back of this list
     concat(concatList){
@@ -375,42 +403,52 @@ removeVal(value){
         return list;
     }
 
+// Locates the first node with value and move all nodes ​less than​ value to front, and nodes ​greater than value to be later. 
+partition( value ){
+
+}
+
+// Remove nodes with duplicate values.
+dedupeList(){
+
+}
+
 // Split a list on a Node that contains data provided and return the new created list
-    splitOnVal(val){
-        if (this.isEmpty()){
-            return null;
-        }
-        if (this.head.data == val){
-            return list;
-        }
-
-        let runner = this.head;
-        let secondHead = null;
-
-        while (runner.next != null){
-            if (runner.next.data == val){
-                secondHead = runner.next;
-                runner.next = null;
-                break;
-            }
-            runner = runner.next;
-        }
-
-        if (secondHead != null){
-            let newList = new SinglyLinkedList();
-            newList.head = secondHead;
-            let runner2 = secondHead;
-            while (runner2.next != null){
-                secondHead.next = runner2.next;
-                secondHead = secondHead.next;
-                runner2 = runner2.next;
-            }
-            newList.display();
-            return newList;
-        }
-
+splitOnVal(val){
+    if (this.isEmpty()){
         return null;
     }
+    if (this.head.data == val){
+        return list;
+    }
+
+    let runner = this.head;
+    let secondHead = null;
+
+    while (runner.next != null){
+        if (runner.next.data == val){
+            secondHead = runner.next;
+            runner.next = null;
+            break;
+        }
+        runner = runner.next;
+    }
+
+    if (secondHead != null){
+        let newList = new SinglyLinkedList();
+        newList.head = secondHead;
+        let runner2 = secondHead;
+        while (runner2.next != null){
+            secondHead.next = runner2.next;
+            secondHead = secondHead.next;
+            runner2 = runner2.next;
+        }
+        newList.display();
+        return newList;
+    }
+
+    return null;
+}
 }
 
 //? Use the SinglyLinkedList here
@@ -419,4 +457,4 @@ list.insertAtFront(2);
 list.insertAtFront(4);
 list.insertAtFront(6);
 list.insertAtFront(8);
-list.average()
+list.min()
