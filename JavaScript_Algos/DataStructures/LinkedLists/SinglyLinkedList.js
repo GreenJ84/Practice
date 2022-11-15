@@ -405,13 +405,28 @@ moveMinToFront(){
 
 // Locates the first node with value and move all nodes ​less than​ value to front, and nodes ​greater than value to be later. 
 partition( value ){
-
+    if (this.isEmpty()){ return null; }
+    let runner = this.head
 }
 
 // Remove nodes with duplicate values.
 dedupeList(){
+    if (this.isEmpty()){ return null; }
+    let runner = this.head
+    let datas = [this.head.data]
+    while ( runner.next ){
+        if (datas.includes(runner.next.data)){
+            let temp = runner.next
+            runner.next = temp.next || null
+            temp.next = null
+            }
+        else{
+            runner = runner.next
+            datas.push(runner.data)
+        }
+        }
+    }
 
-}
 
 // Split a list on a Node that contains data provided and return the new created list
 splitOnVal(val){
@@ -455,6 +470,11 @@ splitOnVal(val){
 var list = new SinglyLinkedList();
 list.insertAtFront(2);
 list.insertAtFront(4);
+list.insertAtFront(4);
+list.insertAtFront(4);
 list.insertAtFront(6);
 list.insertAtFront(8);
-list.min()
+list.insertAtFront(8);
+list.insertAtFront(8);
+list.dedupeList()
+list.display()
