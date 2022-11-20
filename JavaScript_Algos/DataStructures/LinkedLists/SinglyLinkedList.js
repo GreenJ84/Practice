@@ -407,6 +407,40 @@ moveMinToFront(){
 partition( value ){
     if (this.isEmpty()){ return null; }
     let runner = this.head
+    let val = new SinglyLinkedList()
+    let les = new SinglyLinkedList()
+    while(runner){
+        if (runner.data == value){
+            val.head = new ListNode(runner.data)
+        }
+        else if (runner.data < value && les.head == null){
+            les.head = new ListNode(runner.data)
+        }
+        if (les.head && val.head){
+            break
+        }
+        runner = runner.next
+    }
+    runner = this.head;
+    let runnerVal = val.head;
+    let runnerLes = les.head
+    while(runner){
+        if (runner.data === les.head.data || runner.data === val.head.data){
+            runner = runner.next;
+            continue
+        }
+        else if (runner.data > value){
+            runnerVal.next = new ListNode(runner.data);
+            runnerVal = runnerVal.next
+        }
+        else if(runner.data < value){
+            runnerLes.next = new ListNode(runner.data);
+            runnerLes = runnerLes.next
+        }
+        runner = runner.next;
+    }
+    runnerLes.next = val.head;
+    this.head = les.head
 }
 
 // Remove nodes with duplicate values.
@@ -425,7 +459,7 @@ dedupeList(){
             datas.push(runner.data)
         }
         }
-    }
+}
 
 
 // Split a list on a Node that contains data provided and return the new created list
@@ -468,13 +502,12 @@ splitOnVal(val){
 
 //? Use the SinglyLinkedList here
 var list = new SinglyLinkedList();
+list.insertAtFront(1);
 list.insertAtFront(2);
+list.insertAtFront(3);
 list.insertAtFront(4);
-list.insertAtFront(4);
-list.insertAtFront(4);
+list.insertAtFront(5);
 list.insertAtFront(6);
-list.insertAtFront(8);
-list.insertAtFront(8);
-list.insertAtFront(8);
-list.dedupeList()
+list.insertAtFront(7);
+list.partition(4)
 list.display()
