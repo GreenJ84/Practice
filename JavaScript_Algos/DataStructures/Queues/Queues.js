@@ -6,32 +6,6 @@ class QueueNode{
 
 }
 
-class StackNode {
-    constructor(data){
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class Stack{
-
-    constructor(){
-        this.top = null;
-        this.length = 0;
-    }
-
-    push(item){
-        let newNode = new StackNode(item);
-
-        let runner = this.top; 
-        this.top = newNode;
-        newNode.next = runner;
-
-        this.length++;
-        return this.length;
-    }
-}
-
 class Queue{
     constructor(){
         this.head = null;
@@ -156,6 +130,15 @@ class Queue{
         return true;
     }
 
+}
+
+var q2 = new Queue();
+
+
+
+
+
+/*
     isPalindrome(){
         let runner1 = this.head;
         let stackX = new Stack();
@@ -208,6 +191,4 @@ class Queue{
     }
     return returnNode;
 }
-}
-
-var q2 = new Queue();
+*/
