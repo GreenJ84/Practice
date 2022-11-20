@@ -68,6 +68,17 @@ class Stack{
     size(){
         return this.length;
     }
+
+    contains( val ){
+        runner = this.top
+        while(runner){
+            if (runner.data == val){
+                return true
+            }
+            runner = runner.next
+        }
+        return false
+    }
 }
 
 var stack = new Stack();
