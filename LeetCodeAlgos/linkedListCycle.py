@@ -10,6 +10,7 @@ class ListNode:
         self.next = None
 
 class Solution:
+    # Returns the node that is the loop connection in a linked list (or None)
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         f1 = s1 = head
         while(f1 and f1.next):
@@ -22,5 +23,16 @@ class Solution:
                     s1 = s1.next
                 return f1
         return None
+
+    # Checks True/False if the linked list has a loop present
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        f1 = f2 = s1 = head
+        while(f2 and f2.next and f2.next.next):
+            f2 = f1.next.next.next
+            f1 = f1.next.next
+            s1 = s1.next
+            if f1 == s1 or f2 == s1:
+                return True
+        return False
 
 s = Solution()
