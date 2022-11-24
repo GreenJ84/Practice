@@ -4,15 +4,21 @@
 from math import inf
 from typing import List
 
-
 class Solution:
     def nextGreatestLetter(self, letters: List[str], target: str) -> str:
-        abc =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        for i in range(letters.index(target), len(letters)):
+            if letters[i]>target:
+                return letters[i]
+        return letters[0]
 
-        place = abc.index(target)+1
-        while place<26 and abc[place] not in letters:
-            place+=1
-        return letters[letters.index(abc[place])] if place<26 else letters[0]
+# class Solution:
+#     def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+#         abc =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+#         place = abc.index(target)+1
+#         while place<26 and abc[place] not in letters:
+#             place+=1
+#         return letters[letters.index(abc[place])] if place<26 else letters[0]
 
 s = Solution()
 # print(s.nextGreatestLetter(["c","f","j"], 'c'))
