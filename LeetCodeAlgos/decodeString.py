@@ -6,22 +6,32 @@
 class Solution:
     def decodeString(self, s: str) -> str:
         res = ''
-        for i in range(0, len(s)):
-            if s[i] == '[':
-                temp, j = '', i
-                while(j != ']'):
-                    temp += s[j]
-                res += breakdown(i-1, temp)
+        stack = []
 
-def breakdown(rep, val):
-    for i in range(0, len(val)):
-        res = ''
-        if s[i] == '[':
-            temp, j = '', i
-            while(j != ']'):
-                temp += s[j]
-            res += breakdown(i-1, temp)
-        
+        for c in s:
+            if c.isdigit():
+                if len(res)!=0 and not res.isdigit():
+                    stack.append(res)
+                    res=''
+                res+=c
+            elif c == '[':
+                stack.append(res)
+                res=''
+            elif c == ']':
+                if not stack[-1].isdigit():
+                    res = stack.pop()+res
+                stack.append(res)
+                res=''
+                str = stack.pop()
+                rep = stack.pop()
+                for i in range(int(rep)):
+                    res+=str
+            else:
+                res+=c
+        stack.append(res)
+        return ''.join(stack)
+
+
 
 s = Solution()
 print(s.decodeString("3[a]2[bc]"))
