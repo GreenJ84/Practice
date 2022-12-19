@@ -2,39 +2,43 @@
 
 from typing import List
 
-class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-
-        result = [0] * len(temperatures)
-
-        if min(temperatures) == max(temperatures): return result
-
-        stack = []
-
-        for index, temp in enumerate(temperatures):
-            while stack and temperatures[stack[-1]] < temp:
-                prev_temp = stack.pop()
-                result[prev_temp] = index - prev_temp
-            stack.append(index)
-
-        return result
-
-
 # class Solution:
 #     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-#         if min(temperatures) == max(temperatures):
-#             return [0]*len(temperatures)
 
-#         for i in range(len(temperatures)):
-#             j = i
-#             while j<len(temperatures):
-#                 if temperatures[j]>temperatures[i]:
-#                     temperatures[i]=j-i
-#                     break
-#                 j+=1
-#             if j == len(temperatures):
-#                 temperatures[i]=0
-#         return temperatures
+#         result = [0] * len(temperatures)
+
+#         if min(temperatures) == max(temperatures): return result
+
+#         stack = []
+
+#         for index, temp in enumerate(temperatures):
+#             while stack and temperatures[stack[-1]] < temp:
+#                 prev_temp = stack.pop()
+#                 result[prev_temp] = index - prev_temp
+#             stack.append(index)
+
+#         return result
+
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        if min(temperatures) == max(temperatures):
+            return [0]*len(temperatures)
+
+        stack = []
+        for i in range(len(temperatures)-1):
+            if temperatures[i]<temperatures[i+1]:
+                temperatures[i] = 1
+                while stack and temperatures[stack[-1]]<temperatures[i+1]:
+                    temperatures[stack[-1]] = i+1-stack[-1]
+                    stack.pop()
+            else:
+                stack.append(i)
+        if stack:
+            for i in stack:
+                temperatures[i]=0
+        temperatures[-1] = 0
+        return temperatures
 
 
 s = Solution()
