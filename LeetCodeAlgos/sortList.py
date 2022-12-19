@@ -8,6 +8,7 @@ class ListNode:
         self.val = val
         self.next = next
         
+
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next: return head
@@ -17,10 +18,21 @@ class Solution:
             vals.append(head.val)
             head=head.next
         vals.sort()
-        setup = runner = ListNode()
 
-        for i in vals:
-            runner.next = ListNode(i)
-            runner = runner.next
-        return setup.next
+        return ListNode(','.join(map(str, vals)))
+# class Solution:
+#     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         if not head or not head.next: return head
+
+#         vals = []
+#         while head:
+#             vals.append(head.val)
+#             head=head.next
+#         vals.sort()
+#         setup = runner = ListNode()
+
+#         for i in vals:
+#             runner.next = ListNode(i)
+#             runner = runner.next
+#         return setup.next
 
