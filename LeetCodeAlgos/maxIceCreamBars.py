@@ -5,10 +5,10 @@
 
 from typing import List
 
-
+#! Sorted() leads to better runtime than sort()
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
-        costs.sort()
+        costs = sorted(costs)
 
         bars = 0;
         for i in costs:
@@ -17,6 +17,18 @@ class Solution:
             coins-=i
             bars+=1
         return bars
+
+# class Solution:
+#     def maxIceCream(self, costs: List[int], coins: int) -> int:
+#         costs.sort()
+
+#         bars = 0;
+#         for i in costs:
+#             if i>coins:
+#                 return bars
+#             coins-=i
+#             bars+=1
+#         return bars
 
 s = Solution()
 print(s.maxIceCream([1,3,2,4,1],7))
