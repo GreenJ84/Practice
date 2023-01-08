@@ -4,25 +4,18 @@
 
 from typing import List
 
-
+# Improved runtime and memory usage
 class Solution:
     def addToArrayForm(self, num: List[int], k: int) -> List[int]:
-        # int to List
-        nK = []
-        while k:
-            nK.append(k%10)
-            k = k//10
-        nK.reverse()
+        k = str(k)
 
-        # Start adding back to front
         res, sum = [], 0
-        lenn = -max(len(num), len(nK))
 
-        for i in range(-1, lenn-1, -1):
+        for i in range(-1, -max(len(num), len(k))-1, -1):
             if i >= -len(num):
                 sum+=num[i]
-            if i >= -len(nK):
-                sum+=nK[i]
+            if i >= -len(k):
+                sum+=int(k[i])
             
             res.append(sum%10)
             sum = sum//10
@@ -31,6 +24,33 @@ class Solution:
             res.append(sum)
         res.reverse()
         return res
+
+# class Solution:
+#     def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+#         # int to List
+#         nK = []
+#         while k:
+#             nK.append(k%10)
+#             k = k//10
+#         nK.reverse()
+
+#         # Start adding back to front
+#         res, sum = [], 0
+#         lenn = -max(len(num), len(nK))
+
+#         for i in range(-1, lenn-1, -1):
+#             if i >= -len(num):
+#                 sum+=num[i]
+#             if i >= -len(nK):
+#                 sum+=nK[i]
+            
+#             res.append(sum%10)
+#             sum = sum//10
+        
+#         if sum != 0:
+#             res.append(sum)
+#         res.reverse()
+#         return res
 
 s = Solution()
 print(s.addToArrayForm([1,2,0,0], 34))
