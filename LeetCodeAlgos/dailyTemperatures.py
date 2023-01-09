@@ -2,6 +2,29 @@
 
 from typing import List
 
+#* Best stats so far: 79% runtime / 99.3% memory
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        if min(temperatures)==max(temperatures):
+            return [0]*len(temperatures)
+
+        stk = []
+        for i in range(len(temperatures)-1):
+            if temperatures[i]<temperatures[i+1]:
+                temperatures[i]=1
+                while stk and temperatures[stk[-1]]<temperatures[i+1]:
+                    temperatures[stk[-1]] = i+1-stk[-1]
+                    stk.pop()
+            else:
+                stk.append(i)
+
+        if stk:
+            for i in stk:
+                temperatures[i]=0
+        temperatures[-1]=0
+        return temperatures
+
+
 # class Solution:
 #     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
 
@@ -20,25 +43,26 @@ from typing import List
 #         return result
 
 
-class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        if min(temperatures) == max(temperatures):
-            return [0]*len(temperatures)
 
-        stack = []
-        for i in range(len(temperatures)-1):
-            if temperatures[i]<temperatures[i+1]:
-                temperatures[i] = 1
-                while stack and temperatures[stack[-1]]<temperatures[i+1]:
-                    temperatures[stack[-1]] = i+1-stack[-1]
-                    stack.pop()
-            else:
-                stack.append(i)
-        if stack:
-            for i in stack:
-                temperatures[i]=0
-        temperatures[-1] = 0
-        return temperatures
+# class Solution:
+#     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+#         if min(temperatures) == max(temperatures):
+#             return [0]*len(temperatures)
+
+#         stack = []
+#         for i in range(len(temperatures)-1):
+#             if temperatures[i]<temperatures[i+1]:
+#                 temperatures[i] = 1
+#                 while stack and temperatures[stack[-1]]<temperatures[i+1]:
+#                     temperatures[stack[-1]] = i+1-stack[-1]
+#                     stack.pop()
+#             else:
+#                 stack.append(i)
+#         if stack:
+#             for i in stack:
+#                 temperatures[i]=0
+#         temperatures[-1] = 0
+#         return temperatures
 
 
 s = Solution()
