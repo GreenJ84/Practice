@@ -9,22 +9,33 @@
 # Return a list of boolean elements answer, where answer[i] is true if the subarray nums[l[i]], nums[l[i]+1], ... , nums[r[i]] can be rearranged to form an arithmetic sequence, and false otherwise.
 
 from typing import List
-
-def sequence(arr: List[int]) -> bool:
-    arr.sort()
-    d = arr[0]-arr[1]
-    for i in range(1, len(arr)-1):
-        if arr[i]-arr[i+1]!=d:
-            return False
-    return True
-
 class Solution:
     def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
-        ans = [False for _ in range(len(l))]
+        ans = [True for _ in range(len(l))]
         for i in range(len(l)):
-            lvl = [nums[j] for j in range(l[i], r[i]+1)]
-            ans[i]=sequence(lvl)
+            lvl = sorted(nums[l[i]:r[i]+1])
+            d = lvl[0]-lvl[1]
+            for j in range(1, len(lvl)-1):
+                if lvl[j]-lvl[j+1]!=d:
+                    ans[i]=False
+                    break
         return ans
+
+# def sequence(arr: List[int]) -> bool:
+#     arr.sort()
+#     d = arr[0]-arr[1]
+#     for i in range(1, len(arr)-1):
+#         if arr[i]-arr[i+1]!=d:
+#             return False
+#     return True
+
+# class Solution:
+#     def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+#         ans = [False for _ in range(len(l))]
+#         for i in range(len(l)):
+#             lvl = [nums[j] for j in range(l[i], r[i]+1)]
+#             ans[i]=sequence(lvl)
+#         return ans
 
 s = Solution()
 print(s.checkArithmeticSubarrays([4,6,5,9,3,7],[0,0,2],[2,3,5]))
