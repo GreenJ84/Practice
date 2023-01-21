@@ -30,28 +30,16 @@ class MyCircularQueue:
         return True
 
     def Front(self) -> int:
-        if len(self.vals) == 0:
-            return -1
-        else:
-            return self.vals[0]
+        return -1 if len(self.vals) == 0 else self.vals[0]
 
     def Rear(self) -> int:
-        if len(self.vals) == 0:
-            return -1
-        else:
-            return self.vals[-1]
+        return -1 if len(self.vals) == 0 else self.vals[-1]
 
     def isEmpty(self) -> bool:
-        if len(self.vals) == 0:
-            return True
-        else:
-            return False
+        return len(self.vals) == 0
 
     def isFull(self) -> bool:
-        if len(self.vals) == self.size:
-            return True
-        else:
-            return False
+        return len(self.vals) == self.size
 
 
 # Your MyCircularQueue object will be instantiated and called as such:
