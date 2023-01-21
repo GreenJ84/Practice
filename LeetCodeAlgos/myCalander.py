@@ -11,7 +11,11 @@ class MyCalendar:
 
     def book(self, start: int, end: int) -> bool:
         for x in self.events:
-            if (start<x[1] and end>x[1]) or (start<x[0] and end>x[0]) or (start<x[0] and end>x[1]):
+            if (start <= x[0] and end >= x[1]):
+                return False
+            if (start >= x[0] and start < x[1]):
+                return False
+            if (end > x[0] and end < x[1]):
                 return False
         self.events.append([start,end])
         self.events = sorted(self.events)
