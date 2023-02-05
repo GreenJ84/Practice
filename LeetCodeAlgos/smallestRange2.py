@@ -5,20 +5,32 @@
 
 from typing import List
 
-
 class Solution:
     def smallestRangeII(self, nums: List[int], k: int) -> int:
         if len(nums)==1:
             return 0
         nums.sort()
         top, bottom = nums[-1], nums[0]
-        for i in range(len(nums)):
-            if top-nums[i] >= nums[i]-bottom:
-                nums[i] += k
-            else:
-                nums[i] -= k
-            top, bottom = max(nums), min(nums)
-        return max(nums)-min(nums)
+        ans = top - bottom
+        for i in range(len(nums)-1):
+            a, b = nums[i], nums[i+1]
+            ans = min(ans, max(top-k, a+k) - min(bottom+k, b-k))
+        return ans
+
+## 52/69 test cases passed
+# class Solution:
+#     def smallestRangeII(self, nums: List[int], k: int) -> int:
+#         if len(nums)==1:
+#             return 0
+#         nums.sort()
+#         top, bottom = nums[-1], nums[0]
+#         for i in range(len(nums)):
+#             if top-nums[i] >= nums[i]-bottom:
+#                 nums[i] += k
+#             else:
+#                 nums[i] -= k
+#             top, bottom = max(nums), min(nums)
+#         return max(nums)-min(nums)
 
 s = Solution()
 print(s.smallestRangeII([1], 0))
