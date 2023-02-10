@@ -27,8 +27,12 @@ class Solution:
                 quicksort(arr, mid+1, rt)
 
         quicksort(nums, 0, n-1)
-        return nums
+
+one = [2,0,2,1,1,0]
+two = [2,0,1]
 
 s = Solution()
-print(s.sortColors([2,0,2,1,1,0]))
-print(s.sortColors([2,0,1]))
+s.sortColors(one)
+s.sortColors(two)
+print(one)
+print(two)
