@@ -5,23 +5,42 @@
 
 from typing import List
 
-
+# Better runtime and memory performance
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        m, n, o = len(matrix), len(matrix[0]), 0
-
-        for i in range(0, m):
-            if i+1 == m:
-                o = i
-                break
-            elif matrix[i+1][0] > target:
-                o = i
-                break
-        for j in range(0, n):
-            if matrix[o][j] == target:
+        def binarySearch(arr, start, end):
+            while start <= end:
+                mid = (start+end)//2
+                if arr[mid] == target: 
+                    return True
+                elif arr[mid] > target:
+                    end = mid-1
+                else:
+                    start = mid+1
+            return False
+        m = len(matrix[0])
+        for i in matrix:
+            if binarySearch(i, 0, m-1):
                 return True
         return False
 
+# class Solution:
+#     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+#         m, n, o = len(matrix), len(matrix[0]), 0
+
+#         for i in range(0, m):
+#             if i+1 == m:
+#                 o = i
+#                 break
+#             elif matrix[i+1][0] > target:
+#                 o = i
+#                 break
+#         for j in range(0, n):
+#             if matrix[o][j] == target:
+#                 return True
+#         return False
+
 s = Solution()
-print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3))
-print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13))
+# print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3))
+# print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13))
+print(s.searchMatrix([[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], 5))
