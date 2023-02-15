@@ -8,11 +8,18 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        prod = []
-        def check(arr):
-            return functools.reduce(lambda x, y: x*y, arr)
-        for i in range(len(nums)):
-            prod.append(check(nums[:i]+nums[i+1:]))
+        n = len(nums)
+        prod = [1]*n
+
+        fix = 1
+        for i in range(n):
+            prod[i] = fix
+            fix *= nums[i]
+
+        fix = 1
+        for i in range(n-1, -1, -1):
+            prod[i] *= fix
+            fix *= nums[i]
         return prod
 
 s = Solution()
