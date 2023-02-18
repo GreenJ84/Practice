@@ -6,24 +6,35 @@
 import functools
 from typing import List
 
-
 class Solution:
     def findRepeatedDnaSequences(self, s: str) -> List[str]:
         cnt = {}
-        res = []
-        temp = "".join(s[:10])
-        cnt[temp] = 1
-        for i in range(9, len(s)-1):
-            temp = "".join(temp[1:])+s[i+1]
+        for i in range(len(s)-9):
+            temp = s[i:i+10]
             print(temp)
             if temp not in cnt:
                 cnt[temp] = 1
             else:
                 cnt[temp] += 1
-        for item in cnt.items():
-            if item[1] > 1:
-                res.append(item[0])
-        return res
+        return [k for k, v in cnt.items() if v > 1]
+
+# class Solution:
+#     def findRepeatedDnaSequences(self, s: str) -> List[str]:
+#         cnt = {}
+#         res = []
+#         temp = "".join(s[:10])
+#         cnt[temp] = 1
+#         for i in range(9, len(s)-1):
+#             temp = "".join(temp[1:])+s[i+1]
+#             print(temp)
+#             if temp not in cnt:
+#                 cnt[temp] = 1
+#             else:
+#                 cnt[temp] += 1
+#         for item in cnt.items():
+#             if item[1] > 1:
+#                 res.append(item[0])
+#         return res
 s = Solution()
 print(s.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"))
 print(s.findRepeatedDnaSequences("AAAAAAAAAAAAA"))
