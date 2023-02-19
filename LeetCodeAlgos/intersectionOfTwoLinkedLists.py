@@ -21,15 +21,29 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        runner1, ls1 = headA, []
+        runner1, ls = headA, {}
         runner2 = headB
         while runner1:
-            print(runner1.val)
-            ls1.append(runner1)
+            ls[runner1] = 1
             runner1 = runner1.next
         while runner2:
             print(runner2.val)
-            if runner2 in ls1:
+            if runner2 in ls:
                 return runner2
             runner2 = runner2.next
         return None
+
+# class Solution:
+#     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+#         runner1, ls1 = headA, []
+#         runner2 = headB
+#         while runner1:
+#             print(runner1.val)
+#             ls1.append(runner1)
+#             runner1 = runner1.next
+#         while runner2:
+#             print(runner2.val)
+#             if runner2 in ls1:
+#                 return runner2
+#             runner2 = runner2.next
+#         return None
