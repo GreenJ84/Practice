@@ -16,48 +16,81 @@ class Solution:
             return l2
         if not l2:
             return l1
-        # set number holders for easier val access
-        ll1, ll2 = [], []
-        # Run through each LinkedList to grab vals
-        runner = l1
-        while runner:
-            ll1.append(runner.val)
+        res = runner = ListNode()
+        temp: int = 0
+
+        while l1 and l2:
+            temp += l1.val + l2.val
+            runner.next = ListNode(temp % 10)
             runner = runner.next
-        runner = l2
-        while runner:
-            ll2.append(runner.val)
-            runner = runner.next
-        print(ll1, ll2)
-        # Set longest list and math intermediate
-        work = ll1 if len(ll1)>=len(ll2) else ll2
-        temp = 0
-        # Do addition back to front of arrays
-        for i in range(0, len(work)):
-            # Conditional depending on each lists length
-            if i >= len(ll1):
-                temp = ll2[i]+temp
-            elif i >= len(ll2):
-                temp = ll1[i]+temp
-            else:
-                temp = ll1[i]+ll2[i]+temp
-            # Once a sum is acheived add the ones digit to current spot
-            work[i] = temp % 10
-            # Floor Divide by ten to reove ones place
-            temp = temp//10
-        # If any leftover sum process it
-        if temp:
-            # If large then 10 process down and add to end
-            while temp > 9:
-                work = [temp % 10]+work[:]
+            temp = temp // 10
+            l1, l2 = l1.next, l2.next
+        def finish(temp: int, list: ListNode, runner: ListNode):
+            while list:
+                temp += list.val
+                runner.next = ListNode(temp % 10)
+                runner = runner.next
                 temp = temp // 10
-            # add final sum digit to end
-            work = work[:]+[temp]
-        # Put your result into the linked list
-        runner = l1
-        for i in work:
-            runner.next = ListNode(i)
-            runner=runner.next
-        return l1.next
+                list = list.next
+        if l1:
+            finish(temp, l1, runner)
+        if l2:
+            finish(temp, l2, runner)
+
+        if temp : runner.next = ListNode(temp)
+        return res.next
+
+
+
+# class Solution:
+#     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+#         # Returns if either or both args are missing
+#         if not l1:
+#             return l2
+#         if not l2:
+#             return l1
+#         # set number holders for easier val access
+#         ll1, ll2 = [], []
+#         # Run through each LinkedList to grab vals
+#         runner = l1
+#         while runner:
+#             ll1.append(runner.val)
+#             runner = runner.next
+#         runner = l2
+#         while runner:
+#             ll2.append(runner.val)
+#             runner = runner.next
+#         print(ll1, ll2)
+#         # Set longest list and math intermediate
+#         work = ll1 if len(ll1)>=len(ll2) else ll2
+#         temp = 0
+#         # Do addition back to front of arrays
+#         for i in range(0, len(work)):
+#             # Conditional depending on each lists length
+#             if i >= len(ll1):
+#                 temp = ll2[i]+temp
+#             elif i >= len(ll2):
+#                 temp = ll1[i]+temp
+#             else:
+#                 temp = ll1[i]+ll2[i]+temp
+#             # Once a sum is acheived add the ones digit to current spot
+#             work[i] = temp % 10
+#             # Floor Divide by ten to reove ones place
+#             temp = temp//10
+#         # If any leftover sum process it
+#         if temp:
+#             # If large then 10 process down and add to end
+#             while temp > 9:
+#                 work = [temp % 10]+work[:]
+#                 temp = temp // 10
+#             # add final sum digit to end
+#             work = work[:]+[temp]
+#         # Put your result into the linked list
+#         runner = l1
+#         for i in work:
+#             runner.next = ListNode(i)
+#             runner=runner.next
+#         return l1.next
 
 
 
