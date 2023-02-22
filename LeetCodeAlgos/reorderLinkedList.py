@@ -12,56 +12,78 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        # Set two list runners
-        runner, runner2 = head, head.next
-        # If only one Node return that node
-        if not runner2 or not runner2.next:
-            return head
-        # While the fast runner still in list run down list
-        while runner2:
-            runner2 = runner2.next
-            if not runner2: break
-            runner2 = runner2.next
-            # slow runner is looking for the halfway point
-            runner = runner.next
+        arr = []
+        current = head
 
-        # Move runner 2 to start of second half
-        runner2 = runner.next
-        # Cut the first half off (still has the head)
-        runner.next = None
-        # Move slow runner onto the second half
-        runner = runner2.next
-        # Remove second half's "head"
-        runner2.next = None
-        # Run throught the list reversing pointers 
-        while runner and runner.next:
-            temp = runner.next
-            runner.next = runner2
-            runner2 = runner
-            runner = temp
-        if runner:
-            runner.next = runner2
-        else: 
-            runner = runner2
+        while current:
+            arr.append(current)
+            current = current.next
 
-        # Runner corrently points to the second half reversed
-        # Set Runner2 to the head of the first half (which is always gonna be even or 1 longer)
-        runner2 = head
-        while runner:
-            # Save the next value for each section
-            temp = runner2.next
-            temp2 = runner.next
-            # Add the first value from the second section to the first section
-            runner2.next = runner
-            #Add the rest of the first section back on
-            runner.next = temp
-            runner2 = temp
-            # Reset runner on the second section
-            runner = temp2
-        return head
+        left, right = 0, len(arr) - 1
+        res = []
+
+        while left <= right:
+            left_node, right_node = arr[left], arr[right]
+            res.append(left_node)
+            res.append(right_node)
+            left += 1
+            right -= 1
+        
+        for i in range(len(res) - 1):
+            res[i].next = res[i + 1]
+        res[i + 1].next = None
+
+# class Solution:
+#     def reorderList(self, head: Optional[ListNode]) -> None:
+#         # Set two list runners
+#         runner, runner2 = head, head.next
+#         # If only one Node return that node
+#         if not runner2 or not runner2.next:
+#             return head
+#         # While the fast runner still in list run down list
+#         while runner2:
+#             runner2 = runner2.next
+#             if not runner2: break
+#             runner2 = runner2.next
+#             # slow runner is looking for the halfway point
+#             runner = runner.next
+
+#         # Move runner 2 to start of second half
+#         runner2 = runner.next
+#         # Cut the first half off (still has the head)
+#         runner.next = None
+#         # Move slow runner onto the second half
+#         runner = runner2.next
+#         # Remove second half's "head"
+#         runner2.next = None
+#         # Run throught the list reversing pointers 
+#         while runner and runner.next:
+#             temp = runner.next
+#             runner.next = runner2
+#             runner2 = runner
+#             runner = temp
+#         if runner:
+#             runner.next = runner2
+#         else: 
+#             runner = runner2
+
+#         # Runner corrently points to the second half reversed
+#         # Set Runner2 to the head of the first half (which is always gonna be even or 1 longer)
+#         runner2 = head
+#         while runner:
+#             # Save the next value for each section
+#             temp = runner2.next
+#             temp2 = runner.next
+#             # Add the first value from the second section to the first section
+#             runner2.next = runner
+#             #Add the rest of the first section back on
+#             runner.next = temp
+#             runner2 = temp
+#             # Reset runner on the second section
+#             runner = temp2
+#         return head
 
 def check(head):
     runner = head
