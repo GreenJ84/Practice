@@ -11,23 +11,38 @@ from typing import List
 
 
 class MinStack:
-
     def __init__(self):
         self.stack = []
 
     def push(self, val: int) -> None:
-        self.stack.append(val)
+        self.stack.append([val, min( val, self.stack[-1][1] if len(self.stack) > 0 else float('inf'))])
 
     def pop(self) -> None:
         self.stack.pop()
 
     def top(self) -> int:
-        print(self.stack[-1])
-        return self.stack[-1]
+        return self.stack[-1][0]
 
     def getMin(self) -> int:
-        print(min(self.stack))
-        return min(self.stack)
+        return self.stack[-1][1]
+
+# class MinStack:
+#     def __init__(self):
+#         self.stack = []
+
+#     def push(self, val: int) -> None:
+#         self.stack.append(val)
+
+#     def pop(self) -> None:
+#         self.stack.pop()
+
+#     def top(self) -> int:
+#         print(self.stack[-1])
+#         return self.stack[-1]
+
+#     def getMin(self) -> int:
+#         print(min(self.stack))
+#         return min(self.stack)
 
 obj = MinStack()
 obj.push(-2)
