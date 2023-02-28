@@ -4,18 +4,22 @@
 
 from typing import List
 
-
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        hold = nums[:k]
-        for i in range(k, len(nums)):
-            mn = min(hold)
-            if nums[i] <= mn:
-                continue
-            else:
-                hold.remove(mn)
-                hold.append(nums[i])
-        return min(hold)
+        nums.sort(reverse=True)
+        return nums[k-1]
+
+# class Solution:
+#     def findKthLargest(self, nums: List[int], k: int) -> int:
+#         hold = nums[:k]
+#         for i in range(k, len(nums)):
+#             mn = min(hold)
+#             if nums[i] <= mn:
+#                 continue
+#             else:
+#                 hold.remove(mn)
+#                 hold.append(nums[i])
+#         return min(hold)
 
 s = Solution()
 print(s.findKthLargest([3,2,1,5,6,4], 2))
