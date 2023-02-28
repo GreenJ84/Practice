@@ -4,21 +4,31 @@
 
 from typing import List
 
-
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        keys = [0]
         visited = []
         def openRoom(idx):
             visited.append(idx)
-            keys.remove(idx)
             for key in rooms[idx]:
-                if key not in keys and key not in visited:
-                    keys.append(key)
-            for key in keys:
-                openRoom(key)
+                if key not in visited:
+                    openRoom(key)
         openRoom(0)
         return len(visited) == len(rooms)
+
+# class Solution:
+#     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+#         keys = [0]
+#         visited = []
+#         def openRoom(idx):
+#             visited.append(idx)
+#             keys.remove(idx)
+#             for key in rooms[idx]:
+#                 if key not in keys and key not in visited:
+#                     keys.append(key)
+#             for key in keys:
+#                 openRoom(key)
+#         openRoom(0)
+#         return len(visited) == len(rooms)
 
 s = Solution()
 print(s.canVisitAllRooms([[1],[2],[3],[]]))
