@@ -5,24 +5,38 @@
 # Those numbers for which this process ends in 1 are happy.
 # Return true if n is a happy number, and false if not.
 
-
 class Solution(object):
     def isHappy(self, n):
-        if n < 0:
-            return False
-
         nStr = str(n)
-        x = 0
         count = 20
-        while(x != 1):
+
+        while(True):
             x = 0
             for i in nStr:
                 x += int(i)**2
             count-=1
             if count < 0:
                 return False
+            if x == 1: return True
             nStr = str(x)
-        return True
+
+# class Solution(object):
+#     def isHappy(self, n):
+#         if n < 0:
+#             return False
+
+#         nStr = str(n)
+#         x = 0
+#         count = 20
+#         while(x != 1):
+#             x = 0
+#             for i in nStr:
+#                 x += int(i)**2
+#             count-=1
+#             if count < 0:
+#                 return False
+#             nStr = str(x)
+#         return True
 
 
 s = Solution()
