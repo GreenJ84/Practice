@@ -10,11 +10,23 @@ class Solution:
             else:
                 cnt[i] = 1
         res = sorted(cnt.items(), key=lambda x: x[1], reverse=True)
-        resStr = ""
-        for i in res:
-            for j in range(i[1]):
-                resStr += i[0]
-        return resStr
+        res = list(map(lambda x: "".join([x[0]]) * x[1], res))
+        return "".join(res)
+
+# class Solution:
+#     def frequencySort(self, s: str) -> str:
+#         cnt = {}
+#         for i in s:
+#             if i in cnt:
+#                 cnt[i] += 1
+#             else:
+#                 cnt[i] = 1
+#         res = sorted(cnt.items(), key=lambda x: x[1], reverse=True)
+#         resStr = ""
+#         for i in res:
+#             for j in range(i[1]):
+#                 resStr += i[0]
+#         return resStr
     
 s = Solution()
 print(s.frequencySort("tree"))
