@@ -14,30 +14,48 @@ class ListNode:
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         print(head)
-        if not head or not head.next or not head.next.next:
+        if not head:
             return head
 
-        evenList, runOdd, step = ListNode(), head, 1
+        runOdd, runEven = head, head.next
+        evenList = runEven
 
-        evenList.next = runOdd.next
-        runEven = evenList.next
-        runOdd.next = runOdd.next.next
-        runOdd = runOdd.next
-        runEven.next = None
+        while runEven and runEven.next:
+            runOdd.next = runEven.next
+            runOdd = runOdd.next
 
-        while runOdd:
-            if runOdd.next:
-                runEven.next = runOdd.next
-                runEven = runEven.next
-                if runOdd.next.next:
-                    runOdd.next = runOdd.next.next
-                    runOdd = runOdd.next
-                    runEven.next = None
-                    continue
-            runOdd.next = evenList.next
-            break
+            runEven.next = runOdd.next
+            runEven = runEven.next
+        runOdd.next = evenList
         return head
-        
+
+# class Solution:
+#     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         print(head)
+#         if not head or not head.next or not head.next.next:
+#             return head
+
+#         evenList, runOdd, step = ListNode(), head, 1
+
+#         evenList.next = runOdd.next
+#         runEven = evenList.next
+#         runOdd.next = runOdd.next.next
+#         runOdd = runOdd.next
+#         runEven.next = None
+
+#         while runOdd:
+#             if runOdd.next:
+#                 runEven.next = runOdd.next
+#                 runEven = runEven.next
+#                 if runOdd.next.next:
+#                     runOdd.next = runOdd.next.next
+#                     runOdd = runOdd.next
+#                     runEven.next = None
+#                     continue
+#             runOdd.next = evenList.next
+#             break
+#         return head
+
 # class Solution:
 #     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
 #         if not head or not head.next or not head.next.next:
