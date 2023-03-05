@@ -3,7 +3,7 @@
 # Return the least number of units of times that the CPU will take to finish all the given tasks.
 
 from typing import List
-
+from heapq import *
 
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
@@ -14,21 +14,46 @@ class Solution:
                 hold[task] += 1
             else:
                 hold[task] = 1
-        hold = [item for key, item in list(sorted(hold.items(), key= lambda x: x[1]))]
+        q = []
+
+        for task, rep in hold.items():
+            heappush(q, (1, -rep, task))
         
         runTime = 0
-        while max(hold) > 0:
-            for i in range(1, n+2):
-                while i <= len(hold) and hold[-i] == 0:
-                    hold.pop(-i)
-                    if i > len(hold):
-                        break
-                if i <= len(hold):
-                    hold[-i] -= 1
-                runTime += 1
-                if max(hold) == 0: 
-                    break
+        while q:
+            runTime += 1
+            if q[0][0] <= runTime:
+                time, rep, task = heappop(q)
+                time += (n + 1)
+                rep += 1
+                if rep < 0:
+                    heappush(q, (time, rep, task))
         return runTime
+
+# class Solution:
+#     def leastInterval(self, tasks: List[str], n: int) -> int:
+#         if n == 0: return len(tasks)
+#         hold = {}
+#         for task in tasks:
+#             if task in hold:
+#                 hold[task] += 1
+#             else:
+#                 hold[task] = 1
+#         hold = [item for key, item in list(sorted(hold.items(), key= lambda x: x[1]))]
+        
+#         runTime = 0
+#         while max(hold) > 0:
+#             for i in range(1, n+2):
+#                 while i <= len(hold) and hold[-i] == 0:
+#                     hold.pop(-i)
+#                     if i > len(hold):
+#                         break
+#                 if i <= len(hold):
+#                     hold[-i] -= 1
+#                 runTime += 1
+#                 if max(hold) == 0: 
+#                     break
+#         return runTime
     
 s = Solution()
 # print(s.leastInterval(["A","A","A","B","B","B"], 2))
