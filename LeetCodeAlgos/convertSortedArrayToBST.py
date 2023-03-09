@@ -2,23 +2,42 @@
 
 from typing import List, Optional
 
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-        
+
+# Improved runtime performance
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-        n = len(nums)
-        if n == 0: return None
+        if not nums: return None
 
-        mid = n//2
+        mid = len(nums)//2
+        left = self.sortedArrayToBST(nums[:mid])
+        right = self.sortedArrayToBST(nums[mid+1:])
+        
         return TreeNode(
             nums[mid], 
-            self.sortedArrayToBST(nums[:mid]), 
-            self.sortedArrayToBST(nums[mid+1:]))
+            left, 
+            right)
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+        
+# class Solution:
+#     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+#         n = len(nums)
+#         if n == 0: return None
+
+#         mid = n//2
+#         return TreeNode(
+#             nums[mid], 
+#             self.sortedArrayToBST(nums[:mid]), 
+#             self.sortedArrayToBST(nums[mid+1:]))
 
 s = Solution()
 print(s.sortedArrayToBST([-10,-3,0,5,9]))
