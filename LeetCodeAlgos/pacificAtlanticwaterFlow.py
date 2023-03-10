@@ -6,13 +6,11 @@
 from typing import List
 from collections import deque
 
-
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         m, n = len(heights), len(heights[0])
         # Queue for processing squares
-        pacq = deque()
-        atlq = deque()
+        q = deque()
         # Set for passing squares for each side
         pac = set()
         atl = set()
@@ -20,50 +18,96 @@ class Solution:
         #Traverse all rows
         for i in range(m):
             #Add left side pacific touching 
-            pacq.append((i, 0))
+            q.append((i, 0))
             pac.add((i, 0))
             #Add right side, atlantic touching
-            atlq.append((i, n-1))
             atl.add((i, n-1))
         # Traverse all columns
         for i in range(n):
             # Add top side, pacific touching
-            pacq.append((0, i))
+            q.append((0, i))
             pac.add((0, i))
             #Add bottom side, atlantic touching
-            atlq.append((m-1, i))
             atl.add((m-1, i))
 
-        # Traverse from the Pacific outwards for each currently passing square
-        while pacq:
-            r, c = pacq.popleft()
-            # Check 4 directions from current square
-            for i, j in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-                x, y = r+i, c+j
-                # Skip adjacent places not on our board
-                if x < 0 or x >= m or 0 > y or y >= n:
-                    continue
-                # Skip squares already passing
-                # Skips square not >= to water path
-                if heights[r][c] <= heights[x][y] and (x, y) not in pac:
-                    pacq.append((x, y))
-                    pac.add((x, y))
+        def runQueue(q: deque, s: set):
+            while q:
+                r, c = q.popleft()
+                # Check 4 directions from current square
+                for i, j in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                    x, y = r+i, c+j
+                    # Skip adjacent places not on our board
+                    if x < 0 or x >= m or 0 > y or y >= n:
+                        continue
+                    # Skip squares already passing
+                    # Skips square not >= to water path
+                    if heights[r][c] <= heights[x][y] and (x, y) not in s:
+                        q.append((x, y))
+                        s.add((x, y))
 
-        # Traverse from the Atlantic outwards for each currently passing square
-        while atlq:
-            r, c = atlq.popleft()
-            # Check 4 directions from current square
-            for i, j in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-                x, y = r+i, c+j
-                # Skip adjacent places not on our board
-                if x < 0 or x >= m or 0 > y or y >= n:
-                    continue
-                # Skip squares already passing
-                # Skips square not >= to water path
-                if heights[r][c] <= heights[x][y] and (x, y) not in atl:
-                    atlq.append((x, y))
-                    atl.add((x, y))
+        runQueue(q, pac)
+        q = deque(atl)
+        runQueue(q, atl)
+
         return atl & pac
+
+# class Solution:
+#     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+#         m, n = len(heights), len(heights[0])
+#         # Queue for processing squares
+#         pacq = deque()
+#         atlq = deque()
+#         # Set for passing squares for each side
+#         pac = set()
+#         atl = set()
+
+#         #Traverse all rows
+#         for i in range(m):
+#             #Add left side pacific touching 
+#             pacq.append((i, 0))
+#             pac.add((i, 0))
+#             #Add right side, atlantic touching
+#             atlq.append((i, n-1))
+#             atl.add((i, n-1))
+#         # Traverse all columns
+#         for i in range(n):
+#             # Add top side, pacific touching
+#             pacq.append((0, i))
+#             pac.add((0, i))
+#             #Add bottom side, atlantic touching
+#             atlq.append((m-1, i))
+#             atl.add((m-1, i))
+
+#         # Traverse from the Pacific outwards for each currently passing square
+#         while pacq:
+#             r, c = pacq.popleft()
+#             # Check 4 directions from current square
+#             for i, j in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+#                 x, y = r+i, c+j
+#                 # Skip adjacent places not on our board
+#                 if x < 0 or x >= m or 0 > y or y >= n:
+#                     continue
+#                 # Skip squares already passing
+#                 # Skips square not >= to water path
+#                 if heights[r][c] <= heights[x][y] and (x, y) not in pac:
+#                     pacq.append((x, y))
+#                     pac.add((x, y))
+
+#         # Traverse from the Atlantic outwards for each currently passing square
+#         while atlq:
+#             r, c = atlq.popleft()
+#             # Check 4 directions from current square
+#             for i, j in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+#                 x, y = r+i, c+j
+#                 # Skip adjacent places not on our board
+#                 if x < 0 or x >= m or 0 > y or y >= n:
+#                     continue
+#                 # Skip squares already passing
+#                 # Skips square not >= to water path
+#                 if heights[r][c] <= heights[x][y] and (x, y) not in atl:
+#                     atlq.append((x, y))
+#                     atl.add((x, y))
+#         return atl & pac
 
 
 
