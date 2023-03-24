@@ -5,6 +5,7 @@
 from typing import List
 
 
+## Daily attempt 34/36 Tests Passed
 class Solution:
     def makeConnected(self, n: int, connections: List[List[int]]) -> int:
         if len(connections)+1 < n:
