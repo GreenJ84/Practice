@@ -7,27 +7,39 @@
 from typing import List
 import random
 
-
 class Solution:
-
     def __init__(self, nums: List[int]):
-        self.truNums = nums
         self.nums = nums[:]
-        self.length = len(nums)
         
 
     def reset(self) -> List[int]:
-        self.nums = self.truNums[:]
-        print(self.nums)
         return self.nums
 
     def shuffle(self) -> List[int]:
-        for _ in range(self.length):
-            to = random.randint(0, self.length*100) % self.length - 1
-            fro = random.randint(0, self.length*100) % self.length - 1
-            self.nums[to], self.nums[fro] = self.nums[fro], self.nums[to]
-        print(self.nums)
-        return self.nums
+        shuffle = self.nums[:]
+        random.shuffle(shuffle)
+        return shuffle
+
+
+# class Solution:
+#     def __init__(self, nums: List[int]):
+#         self.truNums = nums
+#         self.nums = nums[:]
+#         self.length = len(nums)
+        
+
+#     def reset(self) -> List[int]:
+#         self.nums = self.truNums[:]
+#         print(self.nums)
+#         return self.nums
+
+#     def shuffle(self) -> List[int]:
+#         for _ in range(self.length):
+#             to = random.randint(0, self.length*100) % self.length - 1
+#             fro = random.randint(0, self.length*100) % self.length - 1
+#             self.nums[to], self.nums[fro] = self.nums[fro], self.nums[to]
+#         print(self.nums)
+#         return self.nums
     
 s1 = Solution([1, 2, 3])
 s1.shuffle()
