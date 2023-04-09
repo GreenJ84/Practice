@@ -7,30 +7,45 @@
     The product, P, of K integers whose sum is S, is maximized when
     those K integers are as close to equal as possible
 """ 
-import math
 
-class Solution:
-    def integerBreak(self, n: int) -> int:
-        ans = 0
-        k = 2
-        while k <= 10 and k <= n:
-            # Get mean for k values
-            num = round(n / k)
-            # Get last offset value
-            if num*k <= n:
-                last = num + n % k 
-            else:
-                last = num - (num*k - n)
-            front = num**(k-1)
-            ans = max(ans, (front*last))
-            k += 1
-        return ans
+class Solution():
+    def integerBreak(self, n: int):
+        if n <= 3:
+            return n - 1
+        
+        meanNum = n // 3
+        remainder = n % 3
+
+        if remainder == 0:
+            return 3 ** meanNum
+        elif remainder == 1:
+            return 3 ** (meanNum - 1) * 4
+        else:
+            return 3 ** meanNum * 2
+
+# import math
+# class Solution:
+#     def integerBreak(self, n: int) -> int:
+#         ans = 0
+#         k = 2
+#         while k <= 10 and k <= n:
+#             # Get mean for k values
+#             num = round(n / k)
+#             # Get last offset value
+#             if num*k <= n:
+#                 last = num + n % k 
+#             else:
+#                 last = num - (num*k - n)
+#             front = num**(k-1)
+#             ans = max(ans, (front*last))
+#             k += 1
+#         return ans
 
 
 
 
 s = Solution()
-# print(s.integerBreak(2))
-# print(s.integerBreak(10))
-# print(s.integerBreak(8))
+print(s.integerBreak(2))
+print(s.integerBreak(10))
+print(s.integerBreak(8))
 print(s.integerBreak(32))
