@@ -3,29 +3,41 @@
 
 from typing import List
 
-
 class Solution:
     def numRescueBoats(self, people: List[int], limit: int) -> int:
         people.sort()
         boats = 0
-        while people and people[-1] == limit:
+        start, end = 0, len(people)-1
+        while start <= end:
+            if people[start] + people[end] <= limit:
+                start += 1
+            end -= 1
             boats += 1
-            people.pop()
 
-        while people:
-            start = people[-1]
-            window = 0
-            people.pop()
-            for i in range(len(people)):
-                if start + window + people[i] > limit:
-                    people = people[i:]
-                    break
-                else:
-                    window += people[i]
-            if window == sum(people):
-                people = []
-            boats+= 1
         return boats
+
+# class Solution:
+#     def numRescueBoats(self, people: List[int], limit: int) -> int:
+#         people.sort()
+#         boats = 0
+#         while people and people[-1] == limit:
+#             boats += 1
+#             people.pop()
+
+#         while people:
+#             start = people[-1]
+#             window = 0
+#             people.pop()
+#             for i in range(len(people)):
+#                 if start + window + people[i] > limit:
+#                     people = people[i:]
+#                     break
+#                 else:
+#                     window += people[i]
+#             if window == sum(people):
+#                 people = []
+#             boats+= 1
+#         return boats
 
 
 s = Solution()
@@ -34,5 +46,5 @@ print(s.numRescueBoats([3,2,2,1], 3)) # 3
 print(s.numRescueBoats([3,5,3,4], 5)) # 4
 print(s.numRescueBoats([2, 2], 5)) # 1
 print(s.numRescueBoats([2,2,2,2,2], 2)) # 5
-print(s.numRescueBoats([1, 2, 3], 7)) # 1
+print(s.numRescueBoats([1, 2, 3], 7)) # 2
 print(s.numRescueBoats([2, 3, 5], 5)) # 2
