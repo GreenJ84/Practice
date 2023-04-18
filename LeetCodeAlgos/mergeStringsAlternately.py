@@ -4,14 +4,31 @@
 class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
         res = ''
-        for i in range(0, min(len(word1), len(word2))):
-            res+=word1[i]
-            res+=word2[i]
-        if len(word1)>len(word2):
-            res+=word1[slice(i+1, len(word1))]
-        elif len(word1)<len(word2):
-            res+=word2[slice(i+1, len(word2))]
+        w1, w2 = len(word1), len(word2)
+        for i in range(0, max(w1, w2)):
+            if i < w1: 
+                res+=word1[i]
+            else: 
+                res+=word2[i:]
+                break
+            if i < w2: 
+                res+=word2[i]
+            else: 
+                res+=word1[i+1:]
+                break
         return res
+
+# class Solution:
+#     def mergeAlternately(self, word1: str, word2: str) -> str:
+#         res = ''
+#         for i in range(0, min(len(word1), len(word2))):
+#             res+=word1[i]
+#             res+=word2[i]
+#         if len(word1)>len(word2):
+#             res+=word1[slice(i+1, len(word1))]
+#         elif len(word1)<len(word2):
+#             res+=word2[slice(i+1, len(word2))]
+#         return res
 
 s = Solution()
 print(s.mergeAlternately('abc','pqr'))
