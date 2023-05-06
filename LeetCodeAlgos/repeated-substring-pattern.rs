@@ -4,18 +4,27 @@
 struct Solution{}
 impl Solution {
     pub fn repeated_substring_pattern(s: String) -> bool {
-        let mut x = s.chars().collect::<Vec<char>>();
-        for _ in 0..(x.len() / 2 as usize) {
-            let first = x[0].clone();
-            x = x[1..(s.len() as usize)].to_vec();
-            x.push(first);
-
-            if x.clone().into_iter().collect::<String>() == s {
+        let n = s.len();
+        for i in 1..n {
+            if n/i * i == n && s[..i].repeat(n/i) == s {
                 return true;
             }
         }
         false
     }
+    // pub fn repeated_substring_pattern(s: String) -> bool {
+    //     let mut x = s.chars().collect::<Vec<char>>();
+    //     for _ in 0..(x.len() / 2 as usize) {
+    //         let first = x[0].clone();
+    //         x = x[1..(s.len() as usize)].to_vec();
+    //         x.push(first);
+
+    //         if x.clone().into_iter().collect::<String>() == s {
+    //             return true;
+    //         }
+    //     }
+    //     false
+    // }
 }
 
 #[cfg(test)]
