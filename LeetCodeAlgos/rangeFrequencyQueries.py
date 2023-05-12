@@ -6,19 +6,33 @@
     # int query(int left, int right, int value) Returns the frequency of value in the subarray arr[left...right].
     # A subarray is a contiguous sequence of elements within an array. arr[left...right] denotes the subarray that contains the elements of nums between indices left and right (inclusive).
 
+import bisect
+from collections import defaultdict
 from typing import List
-
 
 class RangeFreqQuery:
     def __init__(self, arr: List[int]):
-        self.arr = arr
+        self.freq = defaultdict(list)
+        for i, v in enumerate(arr):
+            self.freq[v].append(i)
 
     def query(self, left: int, right: int, value: int) -> int:
-        freq = 0;
-        for i in range(left, right + 1):
-            if self.arr[i] == value:
-                freq += 1
-        return freq
+        arr = self.freq.get(value, None)
+        if not arr:
+            return 0
+        
+        return  bisect.bisect_right(arr, right) - bisect.bisect_left(arr, left)
+
+# class RangeFreqQuery:
+#     def __init__(self, arr: List[int]):
+#         self.arr = arr
+
+#     def query(self, left: int, right: int, value: int) -> int:
+#         freq = 0;
+#         for i in range(left, right + 1):
+#             if self.arr[i] == value:
+#                 freq += 1
+#         return freq
 
 
 # Your RangeFreqQuery object will be instantiated and called as such:
