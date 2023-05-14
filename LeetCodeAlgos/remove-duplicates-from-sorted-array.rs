@@ -2,24 +2,32 @@
 // Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
     // Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
     // Return k.
-use std::collections::HashMap;
+
 struct Solution {}
 impl Solution {
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
-
-        let mut curr = 0;
-        let mut freq: HashMap<i32, i32>= HashMap::new();
-        while curr < nums.len(){
-            if !freq.contains_key(&nums[curr]){
-                freq.insert(nums[curr], 1);
-                curr += 1;
-            } else {
-                nums.remove(curr);
-            }
-        }
+        nums.dedup();
         nums.len() as i32
     }
 }
+
+// use std::collections::HashMap;
+// impl Solution {
+//     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+
+//         let mut curr = 0;
+//         let mut freq: HashMap<i32, i32>= HashMap::new();
+//         while curr < nums.len(){
+//             if !freq.contains_key(&nums[curr]){
+//                 freq.insert(nums[curr], 1);
+//                 curr += 1;
+//             } else {
+//                 nums.remove(curr);
+//             }
+//         }
+//         nums.len() as i32
+//     }
+// }
 
 
 #[cfg(test)]
