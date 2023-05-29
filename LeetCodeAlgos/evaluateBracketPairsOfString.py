@@ -11,30 +11,41 @@
 from typing import List
 from collections import defaultdict
 
-
 class Solution:
     def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
-        map = defaultdict(str)
-        for k, v in knowledge:
-            map[k] = v
-        start = 0
-        end = 0
-        curr = 0
-        while curr < len(s):
-            if s[curr] == '(':
-                start = curr
-            elif s[curr] == ')':
-                end = curr
-                key = s[start + 1 : end]
-                value = None
-                if key in map:
-                    value = map[key]
-                if value is None:
-                    value = '?'
-                s = s[:start] + value + s[end + 1:]
-                curr = start + len(value) -1
-            curr += 1
-        return s
+        map = {k:v for k, v in knowledge}
+        sections = s.split("(")
+        ans = [sections[0]]
+        for section in sections[1:]:
+            key, extra = section.split(")")
+            ans.append(map.get(key, "?"))
+            ans.append(extra)
+        return "".join(ans)
+
+
+# class Solution:
+#     def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
+#         map = defaultdict(str)
+#         for k, v in knowledge:
+#             map[k] = v
+#         start = 0
+#         end = 0
+#         curr = 0
+#         while curr < len(s):
+#             if s[curr] == '(':
+#                 start = curr
+#             elif s[curr] == ')':
+#                 end = curr
+#                 key = s[start + 1 : end]
+#                 value = None
+#                 if key in map:
+#                     value = map[key]
+#                 if value is None:
+#                     value = '?'
+#                 s = s[:start] + value + s[end + 1:]
+#                 curr = start + len(value) -1
+#             curr += 1
+#         return s
 
 s = Solution()
 test1 = s.evaluate("(name)is(age)yearsold", [["name", "bob"], ["age", "two"]])
