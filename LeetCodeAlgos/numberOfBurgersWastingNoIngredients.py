@@ -9,33 +9,41 @@ from typing import List
 class Solution:
     def numOfBurgers(self, tomatoSlices: int, cheeseSlices: int) -> List[int]:
         # Eliminate usatisfactory ingredient pools
-        if tomatoSlices < cheeseSlices * 2:
+        if tomatoSlices % 2 == 1 or cheeseSlices * 2 >= tomatoSlices <= cheeseSlices * 4:
             return []
-        elif tomatoSlices > cheeseSlices * 4:
-            return []
-        elif tomatoSlices % 2 == 1:
-            return []
+
+        return [tomatoSlices//2-cheeseSlices,2*cheeseSlices-tomatoSlices//2]
+    
+# class Solution:
+#     def numOfBurgers(self, tomatoSlices: int, cheeseSlices: int) -> List[int]:
+#         # Eliminate usatisfactory ingredient pools
+#         if tomatoSlices < cheeseSlices * 2:
+#             return []
+#         elif tomatoSlices > cheeseSlices * 4:
+#             return []
+#         elif tomatoSlices % 2 == 1:
+#             return []
         
-        # Get max jumbo burgers with the rest small
-        jumbo = tomatoSlices // 4
-        tomatoSlices = tomatoSlices % 4
-        small = tomatoSlices // 2
+#         # Get max jumbo burgers with the rest small
+#         jumbo = tomatoSlices // 4
+#         tomatoSlices = tomatoSlices % 4
+#         small = tomatoSlices // 2
 
-        # If we dont have enough for min burgers will fail
-        cheeseNeed = jumbo + small
-        if cheeseSlices < cheeseNeed:
-            return []
-        cheeseSlices -= cheeseNeed
+#         # If we dont have enough for min burgers will fail
+#         cheeseNeed = jumbo + small
+#         if cheeseSlices < cheeseNeed:
+#             return []
+#         cheeseSlices -= cheeseNeed
 
-        while cheeseSlices > 0:
-            # Leftover Cheese
-            if jumbo == 0:
-                return []
-            jumbo -= 1
-            small += 2
-            cheeseSlices -= 1
+#         while cheeseSlices > 0:
+#             # Leftover Cheese
+#             if jumbo == 0:
+#                 return []
+#             jumbo -= 1
+#             small += 2
+#             cheeseSlices -= 1
 
-        return [jumbo, small]
+#         return [jumbo, small]
     
 s = Solution()
 print(s.numOfBurgers(16, 7))
