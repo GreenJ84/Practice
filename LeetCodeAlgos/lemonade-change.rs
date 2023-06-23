@@ -7,35 +7,29 @@
 struct Solution {}
 impl Solution {
     pub fn lemonade_change(bills: Vec<i32>) -> bool {
-        let mut bank = Vec::from([0, 0, 0]);
+        let (mut fives, mut tens )= (0, 0);
         for bill in bills.iter() {
             match bill {
                 5 => {
-                    bank[0] += 1;
+                    fives += 1;
                 }
                 10 => {
-                    bank[1] += 1;
-                    if bank[0] <= 0 {
+                    if fives > 0 {
+                        tens += 1;
+                        fives -= 1;
+                    } else {
                         return false;
                     }
-                    bank[0] -= 1;
                 }
                 _ => {
-                    bank[2] += 1;
+                    if tens > 0 && fives > 0 {
+                        tens -= 1;
+                        fives -= 1;
                     // If no 10s must have 3 5s
-                    if bank[1] <= 0 {
-                        // If no 5s cant make change
-                        if bank[0] < 3 {
-                            return false;
-                        } else {
-                            bank[0] -= 3;
-                        }
+                    } else if fives >= 3 {
+                        fives -= 3;
                     } else {
-                        bank[1] -= 1;
-                        if bank[0] <= 0 {
-                            return false;
-                        }
-                        bank[0] -= 1;
+                        return false;
                     }
                 }
             }
@@ -43,6 +37,45 @@ impl Solution {
         true
     }
 }
+
+// impl Solution {
+//     pub fn lemonade_change(bills: Vec<i32>) -> bool {
+//         let mut bank = Vec::from([0, 0, 0]);
+//         for bill in bills.iter() {
+//             match bill {
+//                 5 => {
+//                     bank[0] += 1;
+//                 }
+//                 10 => {
+//                     bank[1] += 1;
+//                     if bank[0] <= 0 {
+//                         return false;
+//                     }
+//                     bank[0] -= 1;
+//                 }
+//                 _ => {
+//                     bank[2] += 1;
+//                     // If no 10s must have 3 5s
+//                     if bank[1] <= 0 {
+//                         // If no 5s cant make change
+//                         if bank[0] < 3 {
+//                             return false;
+//                         } else {
+//                             bank[0] -= 3;
+//                         }
+//                     } else {
+//                         bank[1] -= 1;
+//                         if bank[0] <= 0 {
+//                             return false;
+//                         }
+//                         bank[0] -= 1;
+//                     }
+//                 }
+//             }
+//         }
+//         true
+//     }
+// }
 
 #[cfg(test)]
 mod tests {
