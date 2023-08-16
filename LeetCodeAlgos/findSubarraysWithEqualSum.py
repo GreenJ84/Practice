@@ -6,15 +6,27 @@
 
 from typing import List
 
-
+#! Memory Usage > Performance
+# class Solution:
+#     def findSubarrays(self, nums: List[int]) -> bool:
+#         if len(nums) < 2:
+#             return False
+#         for i in range(len(nums) - 2):
+#             for j in range(i + 1, len(nums) - 1):
+#                 if nums[i] + nums[i + 1] == nums[j] + nums[j + 1]:
+#                     return True
+#         return False
+    
+#! Memory Usage < Performance
 class Solution:
     def findSubarrays(self, nums: List[int]) -> bool:
         if len(nums) < 2:
             return False
-        for i in range(len(nums) - 2):
-            for j in range(i + 1, len(nums) - 1):
-                if nums[i] + nums[i + 1] == nums[j] + nums[j + 1]:
-                    return True
+        values = []
+        for i in range(len(nums) - 1):
+            if nums[i] + nums[i + 1] in values:
+                return True
+            values.append(nums[i] + nums[i + 1])
         return False
     
 s = Solution()
