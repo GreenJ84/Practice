@@ -13,13 +13,24 @@ function memoize(fn) {
   let cache = {};
 
   return function(...args) {
-    const tag = args.map(arg => `${arg}`).join(",");
-    if (tag in cache){
-      return cache[tag];
-    } else {
-      ans = fn(...args);
-      cache[tag] = ans;
-      return ans;
+    if (!`${args}` in cache){
+      cache[`${args}`] = fn(...args);
     }
+    return cache[`${args}`];
   }
 }
+
+// function memoize(fn) {
+//   let cache = {};
+
+//   return function(...args) {
+//     const tag = args.map(arg => `${arg}`).join(",");
+//     if (tag in cache){
+//       return cache[tag];
+//     } else {
+//       ans = fn(...args);
+//       cache[tag] = ans;
+//       return ans;
+//     }
+//   }
+// }
