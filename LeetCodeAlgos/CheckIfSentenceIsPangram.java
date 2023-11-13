@@ -2,21 +2,35 @@
 
 // Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
 
-import java.util.HashSet;
 class Solution {
   public boolean checkIfPangram(String sentence) {
-    HashSet<Character> alpha = new HashSet<Character>();
-    for (int i = 97; i < 123; i++){
-        alpha.add((char) i);
+    if (sentence == null || sentence.length() < 26) {
+      return false;
     }
-    for (char ch: sentence.toCharArray()){
-        if (alpha.contains(ch)){
-            alpha.remove(ch);
-        }
+    for (char alpha = 'a'; alpha <= 'z'; alpha++) {
+      if (sentence.indexOf(alpha) == -1) {
+        return false;
+      }
     }
-    return alpha.size() == 0;
+    return true;
   }
 }
+
+// import java.util.HashSet;
+// class Solution {
+//   public boolean checkIfPangram(String sentence) {
+//     HashSet<Character> alpha = new HashSet<Character>();
+//     for (int i = 97; i < 123; i++){
+//         alpha.add((char) i);
+//     }
+//     for (char ch: sentence.toCharArray()){
+//         if (alpha.contains(ch)){
+//             alpha.remove(ch);
+//         }
+//     }
+//     return alpha.size() == 0;
+//   }
+// }
 
 class CheckIfSentenceIsPangram {
   public static void main(String[] args) {
