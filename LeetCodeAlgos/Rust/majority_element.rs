@@ -10,6 +10,27 @@ impl Solution {
         nums[nums.len() / 2]
     }
 }
+// impl Solution {
+//     pub fn majority_element(nums: Vec<i32>) -> i32 {
+//         let target = (nums.len() / 2) as i32;
+//         print!("{}", target);
+//         let mut track =  std::collections::HashMap::new();
+//         for num in nums.iter(){
+//             if let Some(count) = track.get_mut(num) {
+//                 *count += 1;
+//                 if *count > target {
+//                     return *num;
+//                 }
+//             } else {
+//                 if target <= 1 {
+//                     return *num;
+//                 }
+//                 track.insert(*num, 1);
+//             }
+//         }
+//         return -1;
+//     }
+// }
 
 #[cfg(test)]
 mod tests {
