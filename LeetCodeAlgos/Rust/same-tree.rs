@@ -38,7 +38,8 @@ impl Solution {
                 if p.borrow().val != q.borrow().val {
                     return false;
                 }
-                return Self::is_same_tree(p.borrow().left.clone(), q.borrow().left.clone());
+                return Self::is_same_tree(p.borrow().left.clone(), q.borrow().left.clone())
+                    && Self::is_same_tree(p.borrow().right.clone(), q.borrow().right.clone());
             }
         }
     }
