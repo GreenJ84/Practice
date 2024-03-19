@@ -1,3 +1,5 @@
 .vscode
 needSorting
 **/.DS_Store
+.mono
+*.sln
