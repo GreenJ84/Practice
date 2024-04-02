@@ -1,6 +1,4 @@
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Collections;
 
 class smallestNumberFromTwoDigitArrays {
   public static void main(String[] args){

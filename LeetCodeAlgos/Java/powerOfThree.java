@@ -2,22 +2,24 @@
 
 // An integer n is a power of three, if there exists an integer x such that n == 3x.
 
-class powerOfThree {
+class Solution {
     public boolean isPowerOfThree(int n) {
-        double dividen = n * 1.0;
-        while (dividen >= 1){
-            if (dividen == 3 || dividen == 1){
+        double dividend = n * 1.0;
+        while (dividend >= 1){
+            if (dividend == 3 || dividend == 1){
                 return true;
             }
-            dividen = dividen / 3.0;
+            dividend = dividend / 3.0;
         }
         return false;
     }
+}
 
+class powerOfThree {
     public static void main(String[] args) {
-      Solution solution = new Solution();
-      System.out.println(solution.isPowerOfThree(27));
-      System.out.println(solution.isPowerOfThree(0));
-      System.out.println(solution.isPowerOfThree(-1));
+        Solution solution = new Solution();
+        System.out.println(solution.isPowerOfThree(27));
+        System.out.println(solution.isPowerOfThree(0));
+        System.out.println(solution.isPowerOfThree(-1));
     }
 }
