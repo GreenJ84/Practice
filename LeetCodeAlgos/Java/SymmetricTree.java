@@ -1,5 +1,46 @@
 // Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
+public class SymmetricTree {
+  public static void main(String[] args) {
+    Solution s = new Solution();
+    TreeNode tree1 = new TreeNode(1,
+      new TreeNode(2,
+        new TreeNode(3),
+        new TreeNode(4)
+      ),
+      new TreeNode(2,
+        new TreeNode(4),
+        new TreeNode(3)
+      )
+    );
+    testSymmetricTree(1, tree1, true, s);
+
+  TreeNode tree2 = new TreeNode(1,
+      new TreeNode(2,
+        null,
+        new TreeNode(3)
+      ),
+      new TreeNode(2,
+        null,
+        new TreeNode(3)
+      )
+    );
+    testSymmetricTree(2, tree2, false, s);
+  }
+
+  static void testSymmetricTree(int testNum, TreeNode tree, boolean expected, Solution s) {
+    boolean result = s.isSymmetric(tree);
+
+    System.out.println(String.format(
+      "Test %d: %b / %b",
+      testNum,
+      result,
+      expected
+    ));
+    assert (result == expected);
+  }
+}
+
 // Definition for a binary tree node.
 class TreeNode {
     int val;
@@ -30,34 +71,5 @@ class Solution {
     }
     
     return followTree(left.left, right.right) && followTree(left.right, right.left);
-  }
-}
-
-public class SymmetricTree {
-  public static void main(String[] args) {
-    Solution s = new Solution();
-    TreeNode tree1 = new TreeNode(1,
-      new TreeNode(2,
-        new TreeNode(3),
-        new TreeNode(4)
-      ),
-      new TreeNode(2,
-        new TreeNode(4),
-        new TreeNode(3)
-      )
-    );
-    System.out.println(s.isSymmetric(tree1));
-
-  TreeNode tree2 = new TreeNode(1,
-      new TreeNode(2,
-        null,
-        new TreeNode(3)
-      ),
-      new TreeNode(2,
-        null,
-        new TreeNode(3)
-      )
-    );
-    System.out.println(s.isSymmetric(tree2));
   }
 }
