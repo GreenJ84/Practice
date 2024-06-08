@@ -6,9 +6,28 @@
   // A subarray is a contiguous part of the array.
   // An integer x is a multiple of k if there exists an integer n such that x = n * k. 0 is always a multiple of k.
 
-
+import java.util.Map;
+import java.util.HashMap;
 public class ContinuousSubarraySum {
-  
+  public static void main(String[] args) {
+    Solution solution = new Solution();
+
+    testcheckSubarraySum(1, new int[]{23,2,4,6,7}, 6, true, solution);
+    testcheckSubarraySum(2, new int[]{23,2,6,4,7}, 6, true, solution);
+    testcheckSubarraySum(3, new int[]{23,2,6,4,7}, 13, false, solution);
+  }
+
+  private static void testcheckSubarraySum(int testNum, int[] nums, int k, boolean expected, Solution s){
+    boolean found = s.checkSubarraySum(nums, k);
+
+    System.out.println(String.format(
+      "Test %d: %b / %b (%s)",
+      testNum,
+      found,
+      expected,
+      found == expected? "PASS" : "FAIL"
+    ));
+  }
 }
 
 //! Brute Force!
@@ -27,8 +46,6 @@ public class ContinuousSubarraySum {
 //   }
 // }
 
-import java.util.Map;
-import java.util.HashMap;
 class Solution {
   public boolean checkSubarraySum(int[] nums, int k) {
       Map<Integer, Integer> remainders = new HashMap<>();

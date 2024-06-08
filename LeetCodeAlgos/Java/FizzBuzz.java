@@ -6,28 +6,7 @@
 // answer[i] == i (as a string) if none of the above conditions are true.
 import java.util.*;
 
-class Solution {
-    public List<String> fizzBuzz(int n) {
-        ArrayList<String> ans = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-          if (i % 3 == 0 && i % 5 == 0) {
-            ans.add("FizzBuzz");
-          }
-          else if (i % 3 == 0) {
-            ans.add("Fizz");
-          }
-          else if (i % 5 == 0) {
-            ans.add("Buzz");
-          }
-          else {
-            ans.add(String.valueOf(i));
-          }
-        }
-        return ans;
-    }
-}
-
-class FizzBuzz {
+public class FizzBuzz {
   public static void main(String[] args){
     Solution solution = new Solution();
     printArray(solution.fizzBuzz(3));
@@ -47,4 +26,25 @@ class FizzBuzz {
         System.out.println();
         System.out.println("-----------------");
   }
+}
+
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        ArrayList<String> ans = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+          if (i % 3 == 0 && i % 5 == 0) {
+            ans.add("FizzBuzz");
+          }
+          else if (i % 3 == 0) {
+            ans.add("Fizz");
+          }
+          else if (i % 5 == 0) {
+            ans.add("Buzz");
+          }
+          else {
+            ans.add(String.valueOf(i));
+          }
+        }
+        return ans;
+    }
 }
