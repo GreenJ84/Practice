@@ -20,39 +20,73 @@ public class FindScoreOfArrayAfterMarkingAllElements {
     System.out.println(obj.findScore(new int[]{2,5,6,6,10})); // Output: 18
   }
   public long findScore(int[] nums) {
-      Set<Integer> marked = new HashSet<>();
-      PriorityQueue<Entry<Integer, Integer>> queue = new PriorityQueue<>((a, b) -> {
-        int compare = Integer.compare(a.getKey(), b.getKey());
-        if (compare == 0) {
-            return Integer.compare(a.getValue(), b.getValue());
-        }
-        return compare;
-      });
-    
-      long score = 0;
-
-      for (int i = 0; i < nums.length; i++) {
-          queue.offer(Map.entry(nums[i], i));
+    boolean[] marked = new boolean[nums.length];
+    PriorityQueue<Entry<Integer, Integer>> queue = new PriorityQueue<>((a, b) -> {
+      int compare = Integer.compare(a.getKey(), b.getKey());
+      if (compare == 0) {
+          return Integer.compare(a.getValue(), b.getValue());
       }
+      return compare;
+    });
+    long score = 0;
 
-      while (!queue.isEmpty()) {
-        Entry<Integer, Integer> smallest = queue.poll();
-        if (marked.contains(smallest.getValue())) {
-            continue;
-        }
-        int num = smallest.getKey();
-        int index = smallest.getValue();
-        if (!marked.contains(index)) {
-            score += num;
-            marked.add(index);
-            if (index - 1 >= 0 && !marked.contains(index - 1)) {
-                marked.add(index - 1);
-            }
-            if (index + 1 < nums.length && !marked.contains(index + 1)) {
-                marked.add(index + 1);
-            }
-        }
+    for (int i = 0; i < nums.length; i++) {
+        queue.offer(Map.entry(nums[i], i));
+    }
+    while (!queue.isEmpty()) {
+      Entry<Integer, Integer> smallest = queue.poll();
+      int index = smallest.getValue();
+      if (marked[index]) {
+          continue;
       }
-      return score;
+      int num = smallest.getKey();
+      score += num;
+      marked[index] = true;
+      if (index - 1 >= 0 && !marked[index - 1]) {
+          marked[index - 1] = true;
+      }
+      if (index + 1 < nums.length && !marked[index + 1]) {
+          marked[index + 1] = true;
+      }
+    }
+    return score;
   }
+
+  //! Slow & Poor performance
+  // public long findScore(int[] nums) {
+  //     Set<Integer> marked = new HashSet<>();
+  //     PriorityQueue<Entry<Integer, Integer>> queue = new PriorityQueue<>((a, b) -> {
+  //       int compare = Integer.compare(a.getKey(), b.getKey());
+  //       if (compare == 0) {
+  //           return Integer.compare(a.getValue(), b.getValue());
+  //       }
+  //       return compare;
+  //     });
+    
+  //     long score = 0;
+
+  //     for (int i = 0; i < nums.length; i++) {
+  //         queue.offer(Map.entry(nums[i], i));
+  //     }
+
+  //     while (!queue.isEmpty()) {
+  //       Entry<Integer, Integer> smallest = queue.poll();
+  //       if (marked.contains(smallest.getValue())) {
+  //           continue;
+  //       }
+  //       int num = smallest.getKey();
+  //       int index = smallest.getValue();
+  //       if (!marked.contains(index)) {
+  //           score += num;
+  //           marked.add(index);
+  //           if (index - 1 >= 0 && !marked.contains(index - 1)) {
+  //               marked.add(index - 1);
+  //           }
+  //           if (index + 1 < nums.length && !marked.contains(index + 1)) {
+  //               marked.add(index + 1);
+  //           }
+  //       }
+  //     }
+  //     return score;
+  // }
 }
