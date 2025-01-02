@@ -6,21 +6,39 @@ struct Solution {}
 impl Solution {
     pub fn max_score(s: String) -> i32 {
         let mut max_score = 0;
-        let mut left = 0;
-        let mut right = s.clone().chars().filter(|c| *c == '1').count() as i32;
-        let mut it = s.chars().peekable();
-        while let Some(ch)  = it.next() {
-            if let Some(_) = it.peek(){
-                if ch == '0' {
-                    left += 1;
-                } else {
-                    right -= 1;
-                }
-                max_score = max_score.max(left + right);
+
+        let mut left_zeros = 0;
+        let mut right_ones = s.clone().chars().filter(|c| *c == '1').count() as i32;
+
+        for (idx, ch) in s.char_indices() {
+            if idx == s.len() - 1 { return max_score }
+            if ch == '0' {
+                left_zeros += 1;
+            } else {
+                right_ones -= 1;
             }
+            max_score = max_score.max(left_zeros + right_ones);
         }
         max_score
     }
+    //
+    // pub fn max_score(s: String) -> i32 {
+    //     let mut max_score = 0;
+    //     let mut left = 0;
+    //     let mut right = s.clone().chars().filter(|c| *c == '1').count() as i32;
+    //     let mut it = s.chars().peekable();
+    //     while let Some(ch)  = it.next() {
+    //         if let Some(_) = it.peek(){
+    //             if ch == '0' {
+    //                 left += 1;
+    //             } else {
+    //                 right -= 1;
+    //             }
+    //             max_score = max_score.max(left + right);
+    //         }
+    //     }
+    //     max_score
+    // }
 }
 
 #[cfg(test)]
