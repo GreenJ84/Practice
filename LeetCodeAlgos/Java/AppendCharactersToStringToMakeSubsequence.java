@@ -6,14 +6,14 @@
 
 public class AppendCharactersToStringToMakeSubsequence {
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    AppendCharactersToStringToMakeSubsequence obj = new AppendCharactersToStringToMakeSubsequence();
 
-    testAppendCharacters(1,  "coaching", "coding", 4, solution);
-    testAppendCharacters(2,  "abcde", "a", 0, solution);
-    testAppendCharacters(3,  "a", "a", 0, solution);
+    testAppendCharacters(1,  "coaching", "coding", 4, obj);
+    testAppendCharacters(2,  "abcde", "a", 0, obj);
+    testAppendCharacters(3,  "a", "a", 0, obj);
   }
 
-  public static void testAppendCharacters(int testNum, String s, String t, int expected, Solution sol) {
+  public static void testAppendCharacters(int testNum, String s, String t, int expected, AppendCharactersToStringToMakeSubsequence sol) {
     int result = sol.appendCharacters(s, t);
 
     System.out.println(String.format(
@@ -24,9 +24,7 @@ public class AppendCharactersToStringToMakeSubsequence {
       result == expected? "PASS" : "FAIL"
     ));
   }
-}
 
-class Solution {
   public int appendCharacters(String s, String t) {
     int tIdx = 0;
     char ch = t.charAt(tIdx);
