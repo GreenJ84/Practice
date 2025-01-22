@@ -5,22 +5,25 @@
 import java.util.*;
 
 public class BoatsToSavePeople {
-  
-}
+  public static void main(String[] args) {
+    BoatsToSavePeople obj = new BoatsToSavePeople();
 
-class Solution {
+    System.out.println(obj.numRescueBoats(new int[]{1,2,3,4}, 5));
+    System.out.println(obj.numRescueBoats(new int[]{1,2,1,2,1,2,1,2,1}, 2));
+  }
+
   public int numRescueBoats(int[] people, int limit) {
-      Arrays.sort(people);
-      int boats = 0;
-      int left = 0;
-      int right = people.length - 1;
-      while (left <= right) {
-        if (people[left] + people[right] <= limit) {
-          left++;
-        }
-        right--;
-        boats++;
+    Arrays.sort(people);
+    int boats = 0;
+    int left = 0;
+    int right = people.length - 1;
+    while (left <= right) {
+      if (people[left] + people[right] <= limit) {
+        left++;
       }
-      return boats;
+      right--;
+      boats++;
+    }
+    return boats;
   }
 }

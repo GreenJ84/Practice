@@ -8,76 +8,9 @@
 // The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
 import java.util.*;
 
-class Solution {
-    public int calPoints(String[] operations) {
-        int sum = 0;
-        ArrayList<Integer> scores = new ArrayList<Integer>();
-        for (int i = 0; i < operations.length; i++) {
-          String op = operations[i];
-          Integer prev = null;
-          int prevSpot = scores.size() - 1;
-          switch (op) {
-            case "+":
-              prev = scores.get(prevSpot);
-              Integer befPrev = scores.get(prevSpot - 1);
-              scores.add(prev + befPrev);
-              sum += prev + befPrev;
-              break;
-            case "D":
-              prev = scores.get(prevSpot);
-              scores.add(prev * 2);
-              sum += prev * 2;
-              break;
-            case "C":
-              sum -= scores.get(prevSpot);
-              scores.remove(prevSpot);
-              break;
-            default:
-              Integer score = Integer.parseInt(op);
-              scores.add(score);
-              sum += score;
-              break;
-          }
-        }
-        return sum;
-    }
-}
-
-// class Solution {
-//     public int calPoints(String[] operations) {
-//         ArrayList<Integer> scores = new ArrayList<Integer>();
-//         for (int i = 0; i < operations.length; i++) {
-//           String op = operations[i];
-//           Integer prev = null;
-//           switch (op) {
-//             case "+":
-//               prev = scores.get(scores.size() - 1);
-//               Integer befPrev = scores.get(scores.size() - 2);
-//               scores.add(prev + befPrev);
-//               break;
-//             case "D":
-//               prev = scores.get(scores.size() - 1);
-//               scores.add(prev * 2);
-//               break;
-//             case "C":
-//               scores.remove(scores.size() - 1);
-//               break;
-//             default:
-//               scores.add(Integer.parseInt(op));
-//               break;
-//           }
-//         }
-//         int sum = 0;
-//         for (int score: scores) {
-//           sum += score;
-//         }
-//         return sum;
-//     }
-// }
-
 class BaseballGame {
   public static void main(String[] args) {
-    Solution s = new Solution();
+    BaseballGame s = new BaseballGame();
     
     String[] test1 = new String[] {"5", "2", "C", "D", "+"};
     int ans1 = s.calPoints(test1);
@@ -89,4 +22,68 @@ class BaseballGame {
     System.out.println(ans2);
     assert ans2 == 27;
   }
+
+  public int calPoints(String[] operations) {
+    int sum = 0;
+    ArrayList<Integer> scores = new ArrayList<Integer>();
+    for (int i = 0; i < operations.length; i++) {
+      String op = operations[i];
+      Integer prev = null;
+      int prevSpot = scores.size() - 1;
+      switch (op) {
+        case "+":
+          prev = scores.get(prevSpot);
+          Integer befPrev = scores.get(prevSpot - 1);
+          scores.add(prev + befPrev);
+          sum += prev + befPrev;
+          break;
+        case "D":
+          prev = scores.get(prevSpot);
+          scores.add(prev * 2);
+          sum += prev * 2;
+          break;
+        case "C":
+          sum -= scores.get(prevSpot);
+          scores.remove(prevSpot);
+          break;
+        default:
+          Integer score = Integer.parseInt(op);
+          scores.add(score);
+          sum += score;
+          break;
+      }
+    }
+    return sum;
+  }
+
+
+  //     public int calPoints(String[] operations) {
+  //         ArrayList<Integer> scores = new ArrayList<Integer>();
+  //         for (int i = 0; i < operations.length; i++) {
+  //           String op = operations[i];
+  //           Integer prev = null;
+  //           switch (op) {
+  //             case "+":
+  //               prev = scores.get(scores.size() - 1);
+  //               Integer befPrev = scores.get(scores.size() - 2);
+  //               scores.add(prev + befPrev);
+  //               break;
+  //             case "D":
+  //               prev = scores.get(scores.size() - 1);
+  //               scores.add(prev * 2);
+  //               break;
+  //             case "C":
+  //               scores.remove(scores.size() - 1);
+  //               break;
+  //             default:
+  //               scores.add(Integer.parseInt(op));
+  //               break;
+  //           }
+  //         }
+  //         int sum = 0;
+  //         for (int score: scores) {
+  //           sum += score;
+  //         }
+  //         return sum;
+  //     }
 }
