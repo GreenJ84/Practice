@@ -11,17 +11,18 @@
 
 public class CategorizeBoxAccordingToCriteria {
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    CategorizeBoxAccordingToCriteria obj = new CategorizeBoxAccordingToCriteria();
 
-    testCategorizeBoxAccordingToCriteria(1, 1000, 35, 700, 300, "Heavy", solution);
-    testCategorizeBoxAccordingToCriteria(2, 200, 50, 800, 50, "Neither", solution);
-    testCategorizeBoxAccordingToCriteria(3, 2909, 3968, 3272, 727, "Both", solution);
+    testCategorizeBoxAccordingToCriteria(1, 1000, 35, 700, 300, "Heavy", obj);
+    testCategorizeBoxAccordingToCriteria(2, 200, 50, 800, 50, "Neither", obj);
+    testCategorizeBoxAccordingToCriteria(3, 2909, 3968, 3272, 727, "Both", obj);
   }
 
-  public static void testCategorizeBoxAccordingToCriteria(int testNum, int length, int width, int height, int mass, String expected, Solution s) {
-    String result = s.categorizeBox(length, width, height, mass);
+  private static void testCategorizeBoxAccordingToCriteria(int testNum, int length, int width, int height, int mass, String expected,CategorizeBoxAccordingToCriteria obj) {
+    String result = obj.categorizeBox(length, width, height, mass);
 
     System.out.println(String.format(
+
       "Test %d: %s / %s (%s)",
       testNum,
       result,
@@ -29,9 +30,7 @@ public class CategorizeBoxAccordingToCriteria {
       result.equals(expected) ? "PASS" : "FAIL"
     ));
   }
-}
-
-class Solution {
+  
   public String categorizeBox(int length, int width, int height, int mass) {
     boolean bulky = length >= 10000 ||
       width >= 10000 ||

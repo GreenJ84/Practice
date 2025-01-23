@@ -2,7 +2,14 @@
 
 // Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
 
-class Solution {
+// import java.util.HashSet;
+public class CheckIfSentenceIsPangram {
+  public static void main(String[] args) {
+    CheckIfSentenceIsPangram s = new CheckIfSentenceIsPangram();
+    System.out.println(s.checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
+    System.out.println(s.checkIfPangram("leetcode"));
+  }
+
   public boolean checkIfPangram(String sentence) {
     if (sentence == null || sentence.length() < 26) {
       return false;
@@ -14,28 +21,17 @@ class Solution {
     }
     return true;
   }
-}
 
-// import java.util.HashSet;
-// class Solution {
-//   public boolean checkIfPangram(String sentence) {
-//     HashSet<Character> alpha = new HashSet<Character>();
-//     for (int i = 97; i < 123; i++){
-//         alpha.add((char) i);
-//     }
-//     for (char ch: sentence.toCharArray()){
-//         if (alpha.contains(ch)){
-//             alpha.remove(ch);
-//         }
-//     }
-//     return alpha.size() == 0;
-//   }
-// }
-
-class CheckIfSentenceIsPangram {
-  public static void main(String[] args) {
-    Solution s = new Solution();
-    System.out.println(s.checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
-    System.out.println(s.checkIfPangram("leetcode"));
-  }
+  //   public boolean checkIfPangram(String sentence) {
+  //     HashSet<Character> alpha = new HashSet<Character>();
+  //     for (int i = 97; i < 123; i++){
+  //         alpha.add((char) i);
+  //     }
+  //     for (char ch: sentence.toCharArray()){
+  //         if (alpha.contains(ch)){
+  //             alpha.remove(ch);
+  //         }
+  //     }
+  //     return alpha.size() == 0;
+  //   }
 }
