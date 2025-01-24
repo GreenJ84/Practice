@@ -5,15 +5,15 @@
 
 public class CountNumberOfNiceSubarrays {
   public static void main(String[] args) {
-    Solution s = new Solution();
+    CountNumberOfNiceSubarrays obj = new CountNumberOfNiceSubarrays();
 
-    testNumberOfSubarrays(1, new int[]{1,1,2,1,1}, 3, 2, s);
-    testNumberOfSubarrays(2, new int[]{2,4,6}, 1, 0, s);
-    testNumberOfSubarrays(3, new int[]{2,2,2,1,2,2,1,2,2,2}, 2, 16, s);
+    testNumberOfSubarrays(1, new int[]{1,1,2,1,1}, 3, 2, obj);
+    testNumberOfSubarrays(2, new int[]{2,4,6}, 1, 0, obj);
+    testNumberOfSubarrays(3, new int[]{2,2,2,1,2,2,1,2,2,2}, 2, 16, obj);
   }
 
-  public static void testNumberOfSubarrays(int testNum, int[] nums, int k, int expected, Solution s) {
-    int result = s.numberOfSubarrays(nums, k);
+  public static void testNumberOfSubarrays(int testNum, int[] nums, int k, int expected, CountNumberOfNiceSubarrays obj) {
+    int result = obj.numberOfSubarrays(nums, k);
 
     System.out.println(String.format(
       "Test %d: %d / %d (%s)",
@@ -23,23 +23,21 @@ public class CountNumberOfNiceSubarrays {
       result == expected? "PASS" : "FAIL"
     ));
   }
-}
 
-class Solution {
   public int numberOfSubarrays(int[] nums, int k) {
-      int[] prefixCount = new int[nums.length + 1];
-      prefixCount[0] = 1;
+    int[] prefixCount = new int[nums.length + 1];
+    prefixCount[0] = 1;
 
-      int sum = 0;
-      int niceArrays = 0;
-      for (int num : nums) {
-          sum += num % 2;
-          if (sum >= k) {
-              niceArrays += prefixCount[sum - k];
-          }
-          prefixCount[sum]++;
-      }
-      
-      return niceArrays;
-  }
+    int sum = 0;
+    int niceArrays = 0;
+    for (int num : nums) {
+        sum += num % 2;
+        if (sum >= k) {
+            niceArrays += prefixCount[sum - k];
+        }
+        prefixCount[sum]++;
+    }
+
+    return niceArrays;
+}
 }

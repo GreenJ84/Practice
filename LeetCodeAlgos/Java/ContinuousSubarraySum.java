@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.HashMap;
 public class ContinuousSubarraySum {
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    ContinuousSubarraySum obj = new ContinuousSubarraySum();
 
-    testcheckSubarraySum(1, new int[]{23,2,4,6,7}, 6, true, solution);
-    testcheckSubarraySum(2, new int[]{23,2,6,4,7}, 6, true, solution);
-    testcheckSubarraySum(3, new int[]{23,2,6,4,7}, 13, false, solution);
+    testCheckSubarraySum(1, new int[]{23,2,4,6,7}, 6, true, obj);
+    testCheckSubarraySum(2, new int[]{23,2,6,4,7}, 6, true, obj);
+    testCheckSubarraySum(3, new int[]{23,2,6,4,7}, 13, false, obj);
   }
 
-  private static void testcheckSubarraySum(int testNum, int[] nums, int k, boolean expected, Solution s){
-    boolean found = s.checkSubarraySum(nums, k);
+  private static void testCheckSubarraySum(int testNum, int[] nums, int k, boolean expected, ContinuousSubarraySum obj){
+    boolean found = obj.checkSubarraySum(nums, k);
 
     System.out.println(String.format(
       "Test %d: %b / %b (%s)",
@@ -28,43 +28,39 @@ public class ContinuousSubarraySum {
       found == expected? "PASS" : "FAIL"
     ));
   }
-}
 
-//! Brute Force!
-// class Solution {
-//   public boolean checkSubarraySum(int[] nums, int k) {
-//     long windowSum;
-
-//     for (int start = 0; start < nums.length - 1; start++) {
-//       windowSum = (long)nums[start];
-//       for (int run = start + 1; run < nums.length; run++) {
-//         windowSum += (long)nums[run];
-//         if (windowSum % k == 0) return true;
-//       }
-//     }
-//     return false;
-//   }
-// }
-
-class Solution {
   public boolean checkSubarraySum(int[] nums, int k) {
-      Map<Integer, Integer> remainders = new HashMap<>();
-      remainders.put(0, -1);
+    Map<Integer, Integer> remainders = new HashMap<>();
+    remainders.put(0, -1);
 
-      int sum = 0;
-      for (int idx = 0; idx < nums.length; idx++) {
-          sum += nums[idx];
-          int remainder = k == 0 ? sum : sum % k;
+    int sum = 0;
+    for (int idx = 0; idx < nums.length; idx++) {
+        sum += nums[idx];
+        int remainder = k == 0 ? sum : sum % k;
 
-          if (remainders.containsKey(remainder)) {
-              // Check if segment length is at least two
-              if (idx - remainders.get(remainder) > 1) {
-                  return true;
-              }
-          } else {
-              remainders.put(remainder, idx);
-          }
-      }
-      return false;
+        if (remainders.containsKey(remainder)) {
+            // Check if segment length is at least two
+            if (idx - remainders.get(remainder) > 1) {
+                return true;
+            }
+        } else {
+            remainders.put(remainder, idx);
+        }
+    }
+    return false;
   }
+
+  //! Brute Force!
+  // public boolean checkSubarraySum(int[] nums, int k) {
+  //   long windowSum;
+
+  //   for (int start = 0; start < nums.length - 1; start++) {
+  //     windowSum = (long)nums[start];
+  //     for (int run = start + 1; run < nums.length; run++) {
+  //       windowSum += (long)nums[run];
+  //       if (windowSum % k == 0) return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 }

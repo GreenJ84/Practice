@@ -1,4 +1,9 @@
-public class CountCompleteTreeNodes {}
+public class CountCompleteTreeNodes {
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+}
 
 
 class TreeNode {
@@ -12,11 +17,4 @@ class TreeNode {
         this.left = left;
         this.right = right;
     }
-}
-
-class Solution {
-  public int countNodes(TreeNode root) {
-      if (root == null) return 0;
-      return 1 + countNodes(root.left) + countNodes(root.right);
-  }
 }

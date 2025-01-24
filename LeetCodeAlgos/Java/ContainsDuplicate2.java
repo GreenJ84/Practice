@@ -4,16 +4,16 @@ import java.util.*;
 
 public class ContainsDuplicate2 {
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    ContainsDuplicate2 obj = new ContainsDuplicate2();
 
-    testContainsNearbyDuplicate(1, new int[]{1,2,3,1}, 3, true, solution);
-    testContainsNearbyDuplicate(2, new int[]{1,0,1,1}, 1, true, solution);
-    testContainsNearbyDuplicate(3, new int[]{1,2,3,1,2,3}, 2, false, solution);
-    testContainsNearbyDuplicate(4, new int[]{1,0,3,4}, 2, false, solution);
+    testContainsNearbyDuplicate(1, new int[]{1,2,3,1}, 3, true, obj);
+    testContainsNearbyDuplicate(2, new int[]{1,0,1,1}, 1, true, obj);
+    testContainsNearbyDuplicate(3, new int[]{1,2,3,1,2,3}, 2, false, obj);
+    testContainsNearbyDuplicate(4, new int[]{1,0,3,4}, 2, false, obj);
   }
 
-  public static void testContainsNearbyDuplicate(int testNum, int[] nums, int k, boolean expected, Solution s) {
-    boolean result = s.containsNearbyDuplicate(nums, k);
+  public static void testContainsNearbyDuplicate(int testNum, int[] nums, int k, boolean expected, ContainsDuplicate2 obj) {
+    boolean result = obj.containsNearbyDuplicate(nums, k);
 
     System.out.println(String.format(
       "Test %d: %b / %b (%b)",
@@ -23,10 +23,7 @@ public class ContainsDuplicate2 {
       result == expected? "PASS" : "FAIL"
     ));
   }
-}
 
-
-class Solution {
   public boolean containsNearbyDuplicate(int[] nums, int k) {
     HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
     for (int idx = 0; idx < nums.length; idx++) {

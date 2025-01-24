@@ -9,9 +9,7 @@
 public class ContainerWithMostWater {
   public static void main(String[] args) {}
   static void testMaxArea(String[] args) {}
-}
 
-class Solution {
   public int maxArea(int[] height) {
     int left = 0;
     int right = height.length - 1;
