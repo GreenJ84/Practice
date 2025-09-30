@@ -11,21 +11,31 @@
 struct Solution {}
 impl Solution {
     pub fn triangular_sum(nums: Vec<i32>) -> i32 {
-      let mut n = nums.len();
-      if n == 1 { return nums[0]; }
-
       let mut nums = nums;
-      let mut new_nums: Vec<i32> = Vec::with_capacity(n-1);
-      while new_nums.capacity() > 0 {
-        for idx in 0..n-1 {
-          new_nums.push((nums[idx] + nums[idx + 1]) % 10);
+      while nums.len() > 1 {
+        for idx in 0..nums.len() -1 {
+          nums[idx] = (nums[idx] + nums[idx + 1]) % 10;
         }
-        n -= 1;
-        nums = new_nums;
-        new_nums = Vec::with_capacity(n-1);
+        nums.pop();
       }
       nums[0]
     }
+    // pub fn triangular_sum(nums: Vec<i32>) -> i32 {
+    //   let mut n = nums.len();
+    //   if n == 1 { return nums[0]; }
+
+    //   let mut nums = nums;
+    //   let mut new_nums: Vec<i32> = Vec::with_capacity(n-1);
+    //   while new_nums.capacity() > 0 {
+    //     for idx in 0..n-1 {
+    //       new_nums.push((nums[idx] + nums[idx + 1]) % 10);
+    //     }
+    //     n -= 1;
+    //     nums = new_nums;
+    //     new_nums = Vec::with_capacity(n-1);
+    //   }
+    //   nums[0]
+    // }
 }
 
 #[cfg(test)]
