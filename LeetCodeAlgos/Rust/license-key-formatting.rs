@@ -6,7 +6,7 @@
 
 struct Solution;
 impl Solution {
-    pub fn license_key_formatting(s: String, k: i32) -> String {
+      pub fn license_key_formatting(s: String, k: i32) -> String {
         let mut ans = String::new();
         let mut curr_group = 0;
 
@@ -17,7 +17,9 @@ impl Solution {
               curr_group += 1;
             },
             ch if character.is_ascii_lowercase() => {
-              ans.push_str(&ch.to_uppercase().to_string());
+              // ! ch.to_uppercase().to_string() creates a temporary String object per lowercase character (allocation, capacity, write), which is expensive.
+              // * ch.to_ascii_uppercase() is a cheap char-to-char transform and does not allocate.
+              ans.push(ch.to_ascii_uppercase());
               curr_group += 1;
             },
             _ => { continue; }
@@ -29,10 +31,39 @@ impl Solution {
           }
 
         }
-        ans = ans.chars().rev().collect();
-        if ans.starts_with('-') {
-          ans.remove(0);
+        if ans.ends_with('-') {
+          ans.pop();
         }
-        ans
+        ans.chars().rev().collect()
     }
+
+    // pub fn license_key_formatting(s: String, k: i32) -> String {
+    //     let mut ans = String::new();
+    //     let mut curr_group = 0;
+
+    //     for character in s.chars().rev() {
+    //       match character {
+    //         ch if character.is_ascii_digit() || character.is_ascii_uppercase() => {
+    //           ans.push(ch);
+    //           curr_group += 1;
+    //         },
+    //         ch if character.is_ascii_lowercase() => {
+    //           ans.push_str(&ch.to_uppercase().to_string());
+    //           curr_group += 1;
+    //         },
+    //         _ => { continue; }
+    //       }
+
+    //       if curr_group == k {
+    //         ans.push('-');
+    //         curr_group = 0;
+    //       }
+
+    //     }
+    //     ans = ans.chars().rev().collect();
+    //     if ans.starts_with('-') {
+    //       ans.remove(0);
+    //     }
+    //     ans
+    // }
 }
