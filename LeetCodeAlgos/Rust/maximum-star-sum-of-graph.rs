@@ -4,6 +4,10 @@
 //
 // A star graph is a subgraph of the given graph having a center node containing 0 or more neighbors. In other words, it is a subset of edges of the given graph such that there exists a common node for all edges.
 
+// The star sum is the sum of the values of all the nodes present in the star graph.
+
+// Given an integer k, return the maximum star sum of a star graph containing at most k edges.
+
 use std::collections::*;
 use std::cmp::{Reverse, Ordering};
 
@@ -19,13 +23,8 @@ impl PartialEq for Node {
 }
 impl Eq for Node {}
 impl PartialOrd for Node {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         self.val.partial_cmp(&other.val)
-    }
-}
-impl Ord for Node {
-    fn cmp(&self, other: &Self) -> Ordering{
-        other.val.cmp(&self.val)
     }
 }
 
